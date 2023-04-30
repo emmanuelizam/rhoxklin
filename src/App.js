@@ -1,11 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import Home from './Home';
-import './App.css';
+import Home from "./Home";
+import { GlobalStyle } from "./GlobalStyle";
 
 function App() {
   return (
-    <Home></Home>
+    <React.Fragment>
+      <Home/>
+      <GlobalStyle/>
+    </React.Fragment>
   );
 }
 
