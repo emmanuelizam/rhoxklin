@@ -12,6 +12,7 @@ export const Content = styled.div`
   padding: 0rem 0 0 0rem;
   overflow: hidden;
   background-color: transparent;
+  color: var(--white);
 `;
 
 export const Title = styled.div`
@@ -23,7 +24,8 @@ export const Title = styled.div`
 
   h2 {
     margin: auto;
-    font-size: 3rem;
+    font-size: 4rem;
+    padding: 2rem;
     @media screen and (max-width: 720px) {
       font-size: 2rem;
     }
@@ -33,7 +35,7 @@ export const Title = styled.div`
 export const ServicesContacts = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   
   div {
     display: flex;
@@ -59,24 +61,37 @@ export const ServicesContacts = styled.div`
 
   h2 {
     background-color: var(--blue_dark);
-    color: var(--white);
   }
 `;
 export const Services = styled.div`
   h2 {
-    font-size: var(--font_small);
+    font-size: var(--font_super_small);
     @media screen and (max-width: 720px) {
       font-size: 1rem;
     }
   }
 `;
 
-export const Contacts = styled.div`
-  left-border: 2px black;
-  h2 {
-    font-size: 1.5rem;
+export const Bar = styled.hr`
+margin: 0 15%;
+border: 0;
+background: var(--white);
+  width: 0.2rem;
+`;
 
-    @media screen and (max-width: 720px) {
+export const Contacts = styled.div`
+  img {
+    width: 36px;
+    height: auto;
+    @media screen and (max-width: 500px) {
+    width: 24px
+      height: auto;
+    }
+  }
+  h2 {
+    font-size: var(--font_super_small);
+
+    @media screen and (max-width: 500px) {
       font-size: 1rem;
     }
   }
@@ -89,3 +104,20 @@ export const Rights = styled.div`
     font-size: calc(1rem / 2);
   }
 `;
+
+export const Phone = styled.div`
+  h2 {
+    margin-bottom: 0;
+    width: fit-content;
+    font-size: calc(1rem / 2);
+  }
+`;
+
+export const Address = styled.div`
+  h2 {
+    :hover {
+
+    }
+  }
+`;
+
