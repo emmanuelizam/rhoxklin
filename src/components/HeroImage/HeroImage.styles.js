@@ -6,19 +6,20 @@ export const Wrapper = styled.div`
   background-image: url(${({ Hero }) => Hero});
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll;
 `;
 
 export const Content = styled.div`
-  margin: 2rem;
+  padding: 2rem;
   color: var(--blue_dark);
+  overflow: hidden;
   h1 {
     font-size: var(--font_big);
-    margin: 4rem 0;
+    padding: 4rem 0;
   }
 
   h2 {
     font-size: var(--font_medium);
-    margin: 1rem 0;
+    padding: 1rem 0;
   }
 `;

@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
 :root {
     font-size: 100%;
+    overflow-x: hidden;
     --blue_dark: #038FCD;
     --blue_light: #08A9F0;
     --red: #1A7A25;
