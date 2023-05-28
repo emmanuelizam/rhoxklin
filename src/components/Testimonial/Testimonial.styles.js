@@ -8,8 +8,10 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
   background-color: var(--blue_dark);
+  background: linear-gradient(to top, rgba(3, 143, 205, 0.3) 41%, #fff 100%),
+    linear-gradient(to bottom, rgba(3, 143, 205, 0.3) 41%, #fff 100%) #038fcd;
   width: fit-content;
-  margin: 4rem auto;
+  margin: auto auto 2rem auto;
   overflow: hidden;
   h2 {
     font-size: var(--font_medium);

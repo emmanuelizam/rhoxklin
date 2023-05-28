@@ -7,14 +7,15 @@ import {
   Rights,
   Services,
   ServicesContacts,
-  Bar
+  Bar,
+  Tooltip,
 } from "./Footer.styles";
 import Facebook from "../../images/icon-facebook.svg";
 import Twitter from "../../images/icon-twitter.svg";
 import Instagram from "../../images/icon-instagram.svg";
 import Mail from "../../images/icon-email.svg";
 
-import Call  from "../../images/icons-call.svg";
+import Call from "../../images/icons-call.svg";
 import Office from "../../images/icons-business-building.svg";
 
 const Footer = () => {
@@ -47,23 +48,29 @@ const Footer = () => {
               <a href="rhoxklin@gmail.com">Contact Us</a>
             </h2>
           </Services>
-          <Bar/>
+          <Bar />
           <Contacts>
-              <a href="www.faceboook.com">
-                <img src={Facebook} alt="Facebook" />
-              </a>
-              <a href="www.twitter.com">
-                <img src={Twitter} alt="Twitter" />
-              </a>
-              <a href="www.instgram.com">
-                <img src={Instagram} alt="Instagram" />
-              </a>
-              <a href="rhoxklin@gmail.com">
-                <img src={Mail} alt="Mail" />
-              </a>
+            <a href="www.faceboook.com">
+              <img src={Facebook} alt="Facebook" />
+            </a>
+            <a href="www.twitter.com">
+              <img src={Twitter} alt="Twitter" />
+            </a>
+            <a href="www.instgram.com">
+              <img src={Instagram} alt="Instagram" />
+            </a>
+            <a href="rhoxklin@gmail.com">
+              <img src={Mail} alt="Mail" />
+            </a>
 
-            <img src={Call} alt="05028992233"></img>
-            <img src={Office} alt="No. 5 Ugbomanta Street"></img>
+            <Tooltip>
+              <img src={Call} alt="05028992233"></img>
+              <h2>05028992233</h2>
+            </Tooltip>
+            <Tooltip>
+              <img src={Office} alt="No. 5 Ugbomanta Street"></img>
+              <h2>No. 5 Ugbomanta Street</h2>
+            </Tooltip>
           </Contacts>
         </ServicesContacts>
         <Rights>

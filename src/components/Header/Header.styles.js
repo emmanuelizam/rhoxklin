@@ -32,8 +32,8 @@ export const NavigationContent = styled.div`
   width: auto;
   margin: 0.5rem 2rem;
 
-  @media screen and (max-width: 720px) {
-    font-size: 8px;
+  @media screen and (max-width: 500px) {
+    font-size: 0.3rem;
   }
 
   h3 {
@@ -41,7 +41,7 @@ export const NavigationContent = styled.div`
     color: var(--blue_dark);
     font-size: var(--font_super_small);
     @media screen and (max-width: 500px) {
-      font-size: calc(var(--font_super_small) / 1.5);
+      font-size: 0.5rem;
     }
   }
 
@@ -51,9 +51,9 @@ export const NavigationContent = styled.div`
     height: auto;
     padding: 0.5rem;
     border-radius: 1rem;
-    
-    :hover{
-        background-color: var(--gray);
+
+    :hover {
+      background-color: var(--gray);
     }
   }
 `;
@@ -77,9 +77,10 @@ export const SignIn = styled.div`
 export const Cart = styled.div`
   position: relative;
   margin: auto 1rem;
-  background-image: url(${({cart})=>cart});
+  background-image: url(${({ cart }) => cart});
   background-size: cover;
   background-repeat: no-repeat;
+  display: inline-block;
 
   div {
     position: absolute;
@@ -91,8 +92,8 @@ export const Cart = styled.div`
     background-color: var(--blue_dark);
 
     h3 {
-        color: var(--white);
-        font-size: 8px;
+      color: var(--white);
+      font-size: 8px;
     }
   }
 `;

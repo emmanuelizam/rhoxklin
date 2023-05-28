@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.div`
-  background-color: var(--blue_dark);
+  background: radial-gradient(rgba(0, 0, 0, 0.41) 55%, #038fcd 100%);
   width: fit-content;
   margin: 4rem auto;
   border-radius: 2rem;
@@ -21,11 +21,12 @@ export const Title = styled.div`
 `;
 
 export const ContactUs = styled.div`
-  background-color: var(--blue_dark);
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.41) 50%, #038fcd 100%);
   width: fit-content;
   margin: 4rem auto;
   border-radius: 2rem;
   overflow: hidden;
+  box-shadow: 10px 10px 30px var(--white);
   h2 {
     font-size: var(--font_small);
     color: var(--white);
@@ -74,6 +75,7 @@ export const Laundry = styled.div`
     background-color: var(--gray);
     border-top-right-radius: 10%;
     border-bottom-right-radius: 10%;
+    box-shadow: 2px 2px 3px var(--green);
     h3 {
       color: var(--blue_dark);
     }
@@ -86,6 +88,7 @@ export const Cleaning = styled.div`
     background-color: var(--blue_dark);
     border-top-left-radius: 10%;
     border-bottom-left-radius: 10%;
+    box-shadow: -2px 2px 3px black;
     h3 {
       color: var(--white);
     }
@@ -98,6 +101,7 @@ export const CleaningProducts = styled.div`
     background-color: var(--gray);
     border-top-right-radius: 10%;
     border-bottom-right-radius: 10%;
+    box-shadow: 2px 2px 3px var(--green);
     h3 {
       color: var(--blue_dark);
     }
@@ -110,6 +114,7 @@ export const ArtWorks = styled.div`
     background-color: var(--blue_dark);
     border-top-left-radius: 10%;
     border-bottom-left-radius: 10%;
+    box-shadow: -2px 2px 3px black;
     h3 {
       color: var(--white);
     }
@@ -122,6 +127,7 @@ export const PickUpAndDelivery = styled.div`
     background-color: var(--gray);
     border-top-right-radius: 10%;
     border-bottom-right-radius: 10%;
+    box-shadow: 2px 2px 3px var(--green);
     h3 {
       color: var(--blue_dark);
     }

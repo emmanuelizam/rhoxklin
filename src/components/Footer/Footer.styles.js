@@ -25,7 +25,7 @@ export const Title = styled.div`
   h2 {
     margin: auto;
     font-size: 4rem;
-    padding: 2rem;
+    padding: 1.5rem;
     @media screen and (max-width: 720px) {
       font-size: 2rem;
     }
@@ -36,7 +36,7 @@ export const ServicesContacts = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
+
   div {
     display: flex;
     flex-direction: column;
@@ -73,9 +73,9 @@ export const Services = styled.div`
 `;
 
 export const Bar = styled.hr`
-margin: 0 15%;
-border: 0;
-background: var(--white);
+  margin: 0 15%;
+  border: 0;
+  background: var(--white);
   width: 0.2rem;
 `;
 
@@ -105,19 +105,23 @@ export const Rights = styled.div`
   }
 `;
 
-export const Phone = styled.div`
+export const Tooltip = styled.div`
+  position: relative;
+  display: inline-block;
+
   h2 {
-    margin-bottom: 0;
-    width: fit-content;
-    font-size: calc(1rem / 2);
+    visibility: hidden;
+    width: 120px;
+    background-color: var(--white);
+    color: var(--blue_dark);
+    text-align: center;
+    padding: 5px 0px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+  }
+
+  :hover h2 {
+    visibility: visible;
   }
 `;
-
-export const Address = styled.div`
-  h2 {
-    :hover {
-
-    }
-  }
-`;
-
