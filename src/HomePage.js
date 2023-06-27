@@ -5,7 +5,7 @@ import Services from "./components/Services";
 import { Testimonial } from "./components/Testimonial";
 import Footer from "./components/Footer";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       <Header></Header>
@@ -17,4 +17,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

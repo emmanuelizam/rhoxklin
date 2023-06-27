@@ -45,55 +45,64 @@ export const NavigationContent = styled.div`
     }
   }
 
-  div {
-    display: flex;
+  button {
     width: auto;
     height: auto;
     padding: 0.5rem;
     border-radius: 1rem;
+    border: 0.5px solid var(--blue_dark);
+    background-color: transparent;
+    cursor: pointer;
 
     :hover {
       background-color: var(--gray);
+      transition: 0.5s;
     }
   }
 `;
 
-export const Home = styled.div`
+export const Home = styled.button`
   margin: 0px 1rem;
 `;
 
-export const Services = styled.div`
+export const Services = styled.button`
   margin: 0px 1rem;
 `;
 
-export const ContactUs = styled.div`
-  margin: auto 1rem;
+export const ContactUs = styled.button`
+  margin: 0px 1rem;
 `;
 
-export const SignIn = styled.div`
-  margin: auto 1rem;
+export const SignIn = styled.button`
+  margin: 0px 1rem;
 `;
 
-export const Cart = styled.div`
+export const Cart = styled.button`
+  background-color: var(--white);
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
   position: relative;
-  margin: auto 1rem;
-  background-image: url(${({ cart }) => cart});
-  background-size: cover;
-  background-repeat: no-repeat;
-  display: inline-block;
 
-  div {
+  :hover {
+    background-color: var(--gray);
+  }
+
+  :hover img {
+    opacity: 0.7;
+  }
+  img {
+    width: 26px;
+    height: auto;
+  }
+
+  span {
     position: absolute;
-    display: block;
     border-radius: 50%;
     width: auto;
-    top: -1rem;
-    right: -1.5rem;
-    background-color: var(--blue_dark);
-
-    h3 {
-      color: var(--white);
-      font-size: 8px;
-    }
+    padding: 2px;
+    left: 1rem;
+    top: -0.1rem;
+    background-color: var(--green);
   }
 `;

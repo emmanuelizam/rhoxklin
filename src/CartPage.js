@@ -1,15 +1,16 @@
 import { React } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import LaundryServices from "./components/LaundryServices";
+import Cart from "./components/Cart";
 
-const Laundry = () => {
+const CartPage = () => {
   return (
     <>
       <Header></Header>
-      <LaundryServices></LaundryServices> <Footer></Footer>
+      <Cart></Cart>
+      <Footer></Footer>
     </>
   );
 };
 
-export default Laundry;
+export default CartPage;

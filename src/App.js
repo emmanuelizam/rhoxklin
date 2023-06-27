@@ -1,14 +1,17 @@
 import React from "react";
 
-import Home from "./Home";
-import Laundry from "./Laundry";
-import Cleaning from "./Cleaning";
+import HomePage from "./HomePage";
+import LaundryPage from "./LaundryPage";
+import CleaningPage from "./CleaningPage";
+import CartPage from "./CartPage";
+import CleaningProductsCategoriesPage from "./CleaningProductsCategoriesPage";
+import CleaningMachinesPage from "./CleaningMachinesPage";
 import { GlobalStyle } from "./GlobalStyle";
 
 function App() {
   return (
     <React.Fragment>
-      <Cleaning />
+      <CleaningMachinesPage></CleaningMachinesPage>
       <GlobalStyle />
     </React.Fragment>
   );

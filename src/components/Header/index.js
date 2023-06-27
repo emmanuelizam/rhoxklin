@@ -36,9 +36,8 @@ const Header = () => {
             <h3>Sign In</h3>
           </SignIn>
           <Cart cart={cart}>
-            <div>
-              <h3>1000</h3>
-            </div>
+            <img src={cart} alt="cart"></img>
+            <span>10</span>
           </Cart>
         </NavigationContent>
       </Content>

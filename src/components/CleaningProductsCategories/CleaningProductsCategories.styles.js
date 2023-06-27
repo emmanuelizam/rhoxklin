@@ -10,8 +10,8 @@ export const Wrapper = styled.div`
       rgba(0, 0, 0, 0.65) 100%
     ),
     url(${({ pic }) => pic});
-  background-size: contain;
-  background-repeat: repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
 `;
 

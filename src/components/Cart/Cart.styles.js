@@ -4,13 +4,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: auto;
   overflow: hidden;
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.3) 41%,
-      rgba(0, 0, 0, 0.65) 100%
-    ),
-    url(${({ pic }) => pic});
-  background-size: contain;
+  background-color: var(--white);
   background-repeat: repeat;
   background-position: center;
 `;
@@ -49,54 +43,49 @@ export const ContactUs = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  height: 900px;
+  height: 1080px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 5rem;
+  overflow-y: auto;
 `;
 
 export const Service = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   width: 100%;
   height: auto;
 
   div {
-    width: 100%;
     display: flex;
-    justify-content: center;
-    margin: 3rem 0;
-    padding: 2rem;
-    border-radius: 50%;
-    animation: animateNames 1s cubic-bezier(0.075, 0.82, 0.165, 0.5);
-
-    @keyframes animateNames {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-    :hover {
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.4) 50%,
-        rgba(0, 0, 0, 0.7) 100%
-      );
-    }
-
-    h1 {
-      font-size: var(--font_medium);
-    }
+    justify-content: left;
+    align-items: center;
+    margin: 1rem 0;
   }
 `;
 
-export const NameStyle1 = styled.div`
-  background-color: var(--white);
-  color: var(--blue_dark);
+export const Name = styled.div`
+  width: 90%;
+  padding: 0 1rem;
+  background-color: var(--blue_dark);
+
+  h1 {
+    font-size: var(--font_small);
+    color: var(--white);
+  }
 `;
 
-export const NameStyle2 = styled.div`
-  background-color: var(--blue_dark);
-  color: var(--white);
+export const Remove = styled.div`
+  width: 10%;
+  height: auto;
+  background: var(--green) url(${({ trash }) => trash});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 75% 50%;
+
+  :hover {
+    background-color: var(--red);
+  }
 `;

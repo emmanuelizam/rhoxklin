@@ -7,33 +7,30 @@ import {
   Service,
   Title,
   Wrapper,
-} from "./CleaningServices.styles";
+} from "./CleaningProductsCategories.styles";
 
-const laundry = require("../../images/disinfecting-home.jpg");
+const tools = require("../../images/hands-holding-cleaning-tools-solutions.jpg");
 
-const CleaningServices = () => {
+const CleaningProductsCategories = () => {
   return (
-    <Wrapper pic={laundry}>
+    <Wrapper pic={tools}>
       <Title>
         <h2>CLEANING</h2>
       </Title>
       <Content>
         <Service>
           <NameStyle1>
-            <h1>Home and Office Cleaning</h1>
+            <h1>Basic Cleaning Products</h1>
           </NameStyle1>
           <NameStyle2>
-            <h1>Post-Construction and Industrial cleaning </h1>
+            <h1>Cleaning Chemicals </h1>
           </NameStyle2>
           <NameStyle1>
-            <h1>Before and After-party cleaning</h1>
+            <h1>Essential Cleaning Tools</h1>
           </NameStyle1>
           <NameStyle2>
-            <h1>Carpet and Upholstery cleaning </h1>
+            <h1>Cleaning Machines </h1>
           </NameStyle2>
-          <NameStyle1>
-            <h1>Fumigation and Pest control</h1>
-          </NameStyle1>
         </Service>
       </Content>
       <ContactUs>
@@ -43,4 +40,4 @@ const CleaningServices = () => {
   );
 };
 
-export default CleaningServices;
+export default CleaningProductsCategories;

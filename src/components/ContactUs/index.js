@@ -11,7 +11,7 @@ import {
 
 const laundry = require("../../images/disinfecting-home.jpg");
 
-const CleaningServices = () => {
+const ContactUs = () => {
   return (
     <Wrapper pic={laundry}>
       <Title>
@@ -43,4 +43,4 @@ const CleaningServices = () => {
   );
 };
 
-export default CleaningServices;
+export default ContactUs;
