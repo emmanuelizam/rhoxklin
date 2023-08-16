@@ -25,7 +25,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  padding: 1rem;
   color: var(--blue_dark);
   overflow: hidden;
   h1 {
