@@ -86,7 +86,6 @@ const MyAccount = () => {
         <h2>My Account</h2>
       </Title>
       <div id="id01" class="modal">
-        <a href="#">X</a>
         <Form method="post">
           <label for="firstname">First name: </label>
           <input
