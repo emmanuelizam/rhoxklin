@@ -1,5 +1,5 @@
 import React from "react";
-import { ContactUs, Content, Title, Wrapper } from "./Login.styles";
+import { ContactUsButton, Content, Title, Wrapper } from "./Login.styles";
 
 const laundry = require("../../images/washed_garments.jpg");
 
@@ -53,9 +53,9 @@ const Login = () => {
           ></input>
         </form>
       </Content>
-      <ContactUs>
+      <ContactUsButton href="./contactus">
         <h2>CONTACT US</h2>
-      </ContactUs>
+      </ContactUsButton>
     </Wrapper>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  ContactUs,
+  ContactUsButton,
   Content,
   Form,
   Title,
@@ -8,8 +8,6 @@ import {
   Menu,
   List,
 } from "./MyAccount.styles";
-
-const laundry = require("../../images/washed_garments.jpg");
 
 const MyAccount = () => {
   var formProto = (
@@ -276,9 +274,9 @@ const MyAccount = () => {
           <input type="button" name="save" id="save" value="Save" />
         </Form> */}
       </Content>
-      <ContactUs>
+      <ContactUsButton href="./contactus">
         <h2>CONTACT US</h2>
-      </ContactUs>
+      </ContactUsButton>
     </Wrapper>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  ContactUs,
+  ContactUsButton,
   Content,
   Remove,
   Name,
@@ -139,9 +139,9 @@ const Cart = () => {
           <Remove trash={trash}></Remove>
         </Service>
       </Content>
-      <ContactUs>
+      <ContactUsButton href="./contactus">
         <h2>BUY NOW</h2>
-      </ContactUs>
+      </ContactUsButton>
     </Wrapper>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  ContactUs,
+  ContactUsButton,
   Content,
   NameStyle2,
   NameStyle1,
@@ -36,9 +36,9 @@ const CleaningServices = () => {
           </NameStyle1>
         </Service>
       </Content>
-      <ContactUs>
+      <ContactUsButton href="./contactus">
         <h2>CONTACT US</h2>
-      </ContactUs>
+      </ContactUsButton>
     </Wrapper>
   );
 };

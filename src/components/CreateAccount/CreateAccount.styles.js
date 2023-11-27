@@ -24,7 +24,7 @@ export const Title = styled.div`
   }
 `;
 
-export const ContactUs = styled.button`
+export const ContactUsButton = styled.button`
   background: linear-gradient(to left, rgba(0, 0, 0, 0.41) 50%, #038fcd 100%);
   width: fit-content;
   margin: 4rem auto;
@@ -34,6 +34,8 @@ export const ContactUs = styled.button`
   display: block;
   border: none;
   cursor: pointer;
+  text-decoration: none;
+
   h2 {
     font-size: var(--font_small);
     color: var(--white);

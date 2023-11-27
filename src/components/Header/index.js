@@ -9,7 +9,7 @@ import {
   NavigationContent,
   Home,
   Services,
-  ContactUs,
+  ContactUsHeader,
   SignIn,
   Cart,
 } from "./Header.styles";
@@ -23,19 +23,19 @@ const Header = () => {
         <LogoImg src={logo} alt="Logo"></LogoImg>
         <Bar></Bar>
         <NavigationContent>
-          <Home>
+          <Home href="/">
             <h3>Home</h3>
           </Home>
-          <Services>
+          <Services href="#services">
             <h3>Services</h3>
           </Services>
-          <ContactUs>
+          <ContactUsHeader href="/contactus">
             <h3>Contact Us</h3>
-          </ContactUs>
-          <SignIn>
+          </ContactUsHeader>
+          <SignIn href="/signin">
             <h3>Sign In</h3>
           </SignIn>
-          <Cart cart={cart}>
+          <Cart cart={cart} href="/cart">
             <img src={cart} alt="cart"></img>
             <span>10</span>
           </Cart>

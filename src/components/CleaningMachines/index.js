@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  ContactUs,
+  ContactUsButton,
   Content,
   Item,
   Details,
@@ -68,9 +68,9 @@ const CleaningMachines = () => {
           </AddToCart>
         </Item>
       </Content>
-      <ContactUs>
+      <ContactUsButton href="./contactus">
         <h2>BUY NOW</h2>
-      </ContactUs>
+      </ContactUsButton>
     </Wrapper>
   );
 };

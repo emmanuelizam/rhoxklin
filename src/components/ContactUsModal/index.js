@@ -1,16 +1,28 @@
-import React from "react";
-import { Content, Title, Wrapper } from "./ContactUs.styles.js";
+import React, { useState } from "react";
+import {
+  Content,
+  Title,
+  Wrapper,
+  CloseButton,
+} from "./ContactUsModal.styles.js";
 
 const laundry = require("../../images/disinfecting-home.jpg");
 
-const ContactUs = () => {
+const ContactUsModal = () => {
+  const [display, setDisplay] = useState("none");
+  function myfunction() {
+    setDisplay("none");
+  }
   return (
-    <Wrapper pic={laundry}>
+    <Wrapper display={display}>
+      <CloseButton title="close" onClick={myfunction}>
+        <h1>X</h1>
+      </CloseButton>
       <Title>
         <h2>LET'S HEAR FROM YOU</h2>
       </Title>
       <Content>
-        <form method="post" action="/">
+        <form method="post" action="/contactus">
           <textarea
             name="customer_message"
             id="customer_message"
@@ -47,4 +59,4 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+export default ContactUsModal;

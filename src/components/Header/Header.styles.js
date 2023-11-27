@@ -34,16 +34,7 @@ export const NavigationContent = styled.div`
     font-size: 0.3rem;
   }
 
-  h3 {
-    margin: auto;
-    color: var(--blue_dark);
-    font-size: var(--font_super_small);
-    @media screen and (max-width: 500px) {
-      font-size: 0.5rem;
-    }
-  }
-
-  button {
+  a {
     width: auto;
     height: auto;
     padding: 0.5rem;
@@ -52,6 +43,16 @@ export const NavigationContent = styled.div`
     background-color: transparent;
     cursor: pointer;
     transition: all 0s;
+    text-decoration: none;
+
+    h3 {
+      margin: 0.5rem 0;
+      color: var(--blue_dark);
+      font-size: var(--font_super_small);
+      @media screen and (max-width: 500px) {
+        font-size: 0.5rem;
+      }
+    }
 
     :hover {
       background-color: var(--gray);
@@ -63,23 +64,23 @@ export const NavigationContent = styled.div`
   }
 `;
 
-export const Home = styled.button`
+export const Home = styled.a`
   margin: 0px 1rem;
 `;
 
-export const Services = styled.button`
+export const Services = styled.a`
   margin: 0px 1rem;
 `;
 
-export const ContactUs = styled.button`
+export const ContactUsHeader = styled.a`
   margin: 0px 1rem;
 `;
 
-export const SignIn = styled.button`
+export const SignIn = styled.a`
   margin: 0px 1rem;
 `;
 
-export const Cart = styled.button`
+export const Cart = styled.a`
   background-color: var(--white);
   border: none;
   padding: 5px;

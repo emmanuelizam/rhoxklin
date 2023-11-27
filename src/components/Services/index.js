@@ -8,7 +8,7 @@ import {
   CleaningProducts,
   ArtWorks,
   PickUpAndDelivery,
-  ContactUs,
+  ContactUsButton,
 } from "./Services.styles";
 const laundry = require("../../images/washed_garments.jpg");
 const cleaning = require("../../images/disinfecting-home.jpg");
@@ -17,44 +17,55 @@ const cleaningProducts = require("../../images/hands-holding-cleaning-tools-solu
 const Services = () => {
   return (
     <Wrapper>
-      <Title>
+      <Title id="services">
         <h2>SERVICES</h2>
       </Title>
       <Content>
         <Laundry>
-          <img src={laundry} alt="laundry"></img>
-          <div>
-            <h3>Laundry</h3>
-          </div>
+          <a href="/laundry">
+            <img src={laundry} alt="laundry"></img>
+            <div>
+              <h3>Laundry</h3>
+            </div>
+          </a>
         </Laundry>
+
         <Cleaning>
-          <div>
-            <h3>Cleaning</h3>
-          </div>
-          <img src={cleaning} alt="cleaning"></img>
+          <a href="/cleaning">
+            <div>
+              <h3>Cleaning</h3>
+            </div>
+            <img src={cleaning} alt="cleaning"></img>
+          </a>
         </Cleaning>
         <CleaningProducts>
-          <img src={cleaningProducts} alt="cleaning products"></img>
-          <div>
-            <h3>Cleaning Products</h3>
-          </div>
+          <a href="/cleaningproductscategories">
+            <img src={cleaningProducts} alt="cleaning products"></img>
+            <div>
+              <h3>Cleaning Products</h3>
+            </div>
+          </a>
         </CleaningProducts>
         <ArtWorks>
-          <div>
-            <h3>Art Works</h3>
-          </div>
-          <img src={cleaning} alt="cleaning"></img>
+          <a href="/artworks">
+            <div>
+              <h3>Art Works</h3>
+            </div>
+            <img src={cleaning} alt="cleaning"></img>
+          </a>
         </ArtWorks>
         <PickUpAndDelivery>
-          <img src={laundry} alt="pick up and delivery"></img>
-          <div>
-            <h3>Pick-Up and Delivery</h3>
-          </div>
+          <a href="/pickupanddelivery">
+            <img src={laundry} alt="pick up and delivery"></img>
+            <div>
+              <h3>Pick-Up and Delivery</h3>
+            </div>
+          </a>
         </PickUpAndDelivery>
       </Content>
-      <ContactUs>
+      <ContactUsButton href="./contactus">
         <h2>Contact Us Now</h2>
-      </ContactUs>
+      </ContactUsButton>
     </Wrapper>
   );
 };

@@ -31,18 +31,22 @@ export const Title = styled.div`
   }
 `;
 
-export const ContactUs = styled.div`
+export const ContactUsButton = styled.a`
   background: linear-gradient(to left, rgba(0, 0, 0, 0.41) 50%, #038fcd 100%);
   width: fit-content;
   margin: 4rem auto;
   border-radius: 2rem;
   overflow: hidden;
   box-shadow: 10px 10px 30px var(--white);
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+
   h2 {
     font-size: var(--font_small);
     color: var(--white);
     padding: 1rem;
-    margin: 0rem;
+    margin: auto;
   }
 `;
 
@@ -61,6 +65,8 @@ export const Service = styled.div`
   justify-content: center;
   width: 100%;
   height: auto;
+  text-decoration: none;
+  cursor: pointer;
 
   div {
     display: flex;

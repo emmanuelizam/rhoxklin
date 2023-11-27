@@ -1,7 +1,10 @@
 import React from "react";
-import { ContactUs, Content, Title, Wrapper } from "./CreateAccount.styles";
-
-const laundry = require("../../images/washed_garments.jpg");
+import {
+  ContactUsButton,
+  Content,
+  Title,
+  Wrapper,
+} from "./CreateAccount.styles";
 
 const CreateAccount = () => {
   return (
@@ -92,9 +95,9 @@ const CreateAccount = () => {
           ></input>
         </form>
       </Content>
-      <ContactUs>
+      <ContactUsButton href="./contactus">
         <h2>CONTACT US</h2>
-      </ContactUs>
+      </ContactUsButton>
     </Wrapper>
   );
 };

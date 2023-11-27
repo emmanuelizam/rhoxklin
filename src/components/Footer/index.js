@@ -30,22 +30,22 @@ const Footer = () => {
         <ServicesContacts>
           <Services>
             <h2>
-              <a href="www.faceboook.com">Laundry</a>
+              <a href="./laundry">Laundry</a>
             </h2>
             <h2>
-              <a href="www.twitter.com">Cleaning</a>
+              <a href="./cleaning">Cleaning</a>
             </h2>
             <h2>
-              <a href="www.instgram.com">Cleaning Products</a>
+              <a href="./cleaningproductscategories">Cleaning Products</a>
             </h2>
             <h2>
-              <a href="rhoxklin@gmail.com">Art Works</a>
+              <a href="./artworks">Art Works</a>
             </h2>
             <h2>
-              <a href="rhoxklin@gmail.com">Pick-up and delivery</a>
+              <a href="./pickupanddelivery">Pick-up and delivery</a>
             </h2>
             <h2>
-              <a href="rhoxklin@gmail.com">Contact Us</a>
+              <a href="./contactus">Contact Us</a>
             </h2>
           </Services>
           <Bar />

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  ContactUs,
+  ContactUsButton,
   Content,
   Description,
   Name,
@@ -66,9 +66,9 @@ const LaundryServices = () => {
           </Description>
         </Service>
       </Content>
-      <ContactUs>
+      <ContactUsButton href="./contactus">
         <h2>CONTACT US</h2>
-      </ContactUs>
+      </ContactUsButton>
     </Wrapper>
   );
 };
