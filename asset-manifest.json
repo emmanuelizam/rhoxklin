@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.991c23f8.js",
-    "static/js/787.1acc9128.chunk.js": "/static/js/787.1acc9128.chunk.js",
-    "static/media/hands-holding-cleaning-tools-solutions.jpg": "/static/media/hands-holding-cleaning-tools-solutions.8068739cd0c633a540c9.jpg",
-    "static/media/disinfecting-home.jpg": "/static/media/disinfecting-home.e9e80ebbde96fc00ff3e.jpg",
-    "static/media/rhoxklin_mockup1.png": "/static/media/rhoxklin_mockup1.20bf5d698137ccf39592.png",
-    "static/media/logo_new21.png": "/static/media/logo_new21.5be584c7919462c51456.png",
-    "static/media/washed_garments.jpg": "/static/media/washed_garments.ac59b50cf70e7feab52e.jpg",
-    "static/media/black woman1.jpg": "/static/media/black woman1.821dbd2d16835f2418a4.jpg",
-    "static/media/shopping_cart.png": "/static/media/shopping_cart.d1d4ef982407c8bc5a03.png",
-    "static/media/icon-instagram.svg": "/static/media/icon-instagram.c83e628eea4e83e0d2b6c8e54910510c.svg",
-    "static/media/icons-business-building.svg": "/static/media/icons-business-building.197d9e4ef9ce62cc631be5f024ab1ad6.svg",
-    "static/media/icon-whatsapp.svg": "/static/media/icon-whatsapp.931a9d41773b0c43b4038c09806031d2.svg",
-    "static/media/icon-trash.svg": "/static/media/icon-trash.28bfcdbe15faf6b20504320e310da448.svg",
-    "static/media/icons-call.svg": "/static/media/icons-call.f409338f58d2184d6f6f108e20ad1eeb.svg",
-    "static/media/icon-email.svg": "/static/media/icon-email.ed2c0453346e3ec2c903c4568a727f97.svg",
-    "static/media/icon-twitter.svg": "/static/media/icon-twitter.b16c02d46f547621ed1d71b17ed7571b.svg",
-    "index.html": "/index.html",
-    "static/media/icon-facebook.svg": "/static/media/icon-facebook.5e1cb4b86ac3f872dadcbde3ed31cd4b.svg",
-    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.991c23f8.js.map": "/static/js/main.991c23f8.js.map",
-    "787.1acc9128.chunk.js.map": "/static/js/787.1acc9128.chunk.js.map"
+    "main.css": "/rhoxklin/static/css/main.e6c13ad2.css",
+    "main.js": "/rhoxklin/static/js/main.2d577528.js",
+    "static/js/787.1acc9128.chunk.js": "/rhoxklin/static/js/787.1acc9128.chunk.js",
+    "static/media/hands-holding-cleaning-tools-solutions.jpg": "/rhoxklin/static/media/hands-holding-cleaning-tools-solutions.8068739cd0c633a540c9.jpg",
+    "static/media/disinfecting-home.jpg": "/rhoxklin/static/media/disinfecting-home.e9e80ebbde96fc00ff3e.jpg",
+    "static/media/rhoxklin_mockup1.png": "/rhoxklin/static/media/rhoxklin_mockup1.20bf5d698137ccf39592.png",
+    "static/media/logo_new21.png": "/rhoxklin/static/media/logo_new21.5be584c7919462c51456.png",
+    "static/media/washed_garments.jpg": "/rhoxklin/static/media/washed_garments.ac59b50cf70e7feab52e.jpg",
+    "static/media/black woman1.jpg": "/rhoxklin/static/media/black woman1.821dbd2d16835f2418a4.jpg",
+    "static/media/shopping_cart.png": "/rhoxklin/static/media/shopping_cart.d1d4ef982407c8bc5a03.png",
+    "static/media/icon-instagram.svg": "/rhoxklin/static/media/icon-instagram.c83e628eea4e83e0d2b6c8e54910510c.svg",
+    "static/media/icons-business-building.svg": "/rhoxklin/static/media/icons-business-building.197d9e4ef9ce62cc631be5f024ab1ad6.svg",
+    "static/media/icon-whatsapp.svg": "/rhoxklin/static/media/icon-whatsapp.931a9d41773b0c43b4038c09806031d2.svg",
+    "static/media/icon-trash.svg": "/rhoxklin/static/media/icon-trash.28bfcdbe15faf6b20504320e310da448.svg",
+    "static/media/icons-call.svg": "/rhoxklin/static/media/icons-call.f409338f58d2184d6f6f108e20ad1eeb.svg",
+    "static/media/icon-email.svg": "/rhoxklin/static/media/icon-email.ed2c0453346e3ec2c903c4568a727f97.svg",
+    "static/media/icon-twitter.svg": "/rhoxklin/static/media/icon-twitter.b16c02d46f547621ed1d71b17ed7571b.svg",
+    "index.html": "/rhoxklin/index.html",
+    "static/media/icon-facebook.svg": "/rhoxklin/static/media/icon-facebook.5e1cb4b86ac3f872dadcbde3ed31cd4b.svg",
+    "main.e6c13ad2.css.map": "/rhoxklin/static/css/main.e6c13ad2.css.map",
+    "main.2d577528.js.map": "/rhoxklin/static/js/main.2d577528.js.map",
+    "787.1acc9128.chunk.js.map": "/rhoxklin/static/js/787.1acc9128.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.991c23f8.js"
+    "static/js/main.2d577528.js"
   ]
 }
