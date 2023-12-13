@@ -20,41 +20,41 @@ function App() {
         <Routes>
           <Route path="/rhoxklin/" element={<HomePage></HomePage>} />
           <Route
-            path="/rhoxklin/laundry"
+            path="/rhoxklin/#/laundry"
             element={<LaundryPage></LaundryPage>}
           />
           <Route
-            path="/rhoxklin/cleaning"
+            path="/rhoxklin/#/cleaning"
             element={<CleaningPage></CleaningPage>}
           />
 
           <Route
-            path="/rhoxklin/cleaningproductscategories"
+            path="/rhoxklin/#/cleaningproductscategories"
             element={
               <CleaningProductsCategoriesPage></CleaningProductsCategoriesPage>
             }
           />
           <Route
-            path="/rhoxklin/cleaningmachines"
+            path="/rhoxklin/#/cleaningmachines"
             element={<CleaningMachinesPage></CleaningMachinesPage>}
           />
-          <Route path="/rhoxklin/artworks" element={<h1>Coming Soon!</h1>} />
+          <Route path="/rhoxklin/#/artworks" element={<h1>Coming Soon!</h1>} />
           <Route
-            path="/rhoxklin/pickupanddelivery"
+            path="/rhoxklin/#/pickupanddelivery"
             element={<h1>Coming Soon!</h1>}
           />
-          <Route path="/rhoxklin/cart" element={<CartPage></CartPage>} />
-          <Route path="/rhoxklin/login" element={<LoginPage></LoginPage>} />
+          <Route path="/rhoxklin/#/cart" element={<CartPage></CartPage>} />
+          <Route path="/rhoxklin/#/login" element={<LoginPage></LoginPage>} />
           <Route
-            path="/rhoxklin/createaccount"
+            path="/rhoxklin/#/createaccount"
             element={<CreateAccountPage></CreateAccountPage>}
           />
           <Route
-            path="/rhoxklin/myaccount"
+            path="/rhoxklin/#/myaccount"
             element={<MyAccountPage></MyAccountPage>}
           />
           <Route
-            path="/rhoxklin/contactus"
+            path="/rhoxklin/#/contactus"
             element={<ContactUsPage></ContactUsPage>}
           ></Route>
         </Routes>
