@@ -11,14 +11,30 @@ import {
 
 const laundry = require("../../images/washed_garments.jpg");
 
-const LaundryServices = () => {
+const LaundryServices = ({ setDisplay, setMessageTitle }) => {
+  const myfunction = (event) => {
+    var element = event.target;
+    while (element.className.search(/laundry_service/) === -1) {
+      element = element.parentNode;
+    }
+    setDisplay("block");
+    setMessageTitle(
+      "I NEED LAUNDRY " +
+        element.childNodes[0].childNodes[0].innerHTML.toUpperCase() +
+        "\n\n"
+    );
+  };
   return (
     <Wrapper pic={laundry}>
       <Title>
         <h2>LAUNDRY</h2>
       </Title>
       <Content>
-        <Service>
+        <Service
+          onClick={myfunction}
+          className="laundry_service"
+          id="standard_service"
+        >
           <Name>
             <h1>Standard Service:</h1>
           </Name>
@@ -28,7 +44,11 @@ const LaundryServices = () => {
             </h3>
           </Description>
         </Service>
-        <Service>
+        <Service
+          onClick={myfunction}
+          className="laundry_service"
+          id="express_service"
+        >
           <Name>
             <h1>Express Service:</h1>
           </Name>
@@ -38,7 +58,11 @@ const LaundryServices = () => {
             </h3>
           </Description>
         </Service>
-        <Service>
+        <Service
+          onClick={myfunction}
+          className="laundry_service"
+          id="super_express_service"
+        >
           <Name>
             <h1>Super Express Service:</h1>
           </Name>
@@ -48,7 +72,11 @@ const LaundryServices = () => {
             </h3>
           </Description>
         </Service>
-        <Service>
+        <Service
+          onClick={myfunction}
+          className="laundry_service"
+          id="alteration_service"
+        >
           <Name>
             <h1>Alteration Service:</h1>
           </Name>

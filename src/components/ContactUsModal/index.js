@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Content,
   Title,
@@ -8,33 +8,70 @@ import {
 
 const laundry = require("../../images/disinfecting-home.jpg");
 
-const ContactUsModal = () => {
-  const [display, setDisplay] = useState("none");
-  function myfunction() {
+const ContactUsModal = ({
+  display,
+  setDisplay,
+  messageTitle,
+  setMessageTitle,
+}) => {
+  const [count, setCount] = useState(0);
+
+  function myfunction(event) {
     setDisplay("none");
+    setMessageTitle("");
   }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(`the text entered was ${messageTitle}`);
+  }
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/staffcustomermessage")
+      .then((response) => {
+        if (response.ok) {
+          console.log("response was OK");
+          return response.json();
+        }
+        throw response;
+      })
+      .then((data) => {
+        console.log("here is your data");
+        console.log(data);
+      })
+      .catch((error) => console.log(error))
+      .finally(() => {
+        setCount((count) => (count = count + 1));
+        console.log(`we have updated ${count} times`);
+      });
+  }, [display]);
+
   return (
     <Wrapper display={display}>
-      <CloseButton title="close" onClick={myfunction}>
-        <h1>X</h1>
+      <CloseButton title="close">
+        <h1 onClick={myfunction}>X</h1>
       </CloseButton>
       <Title>
-        <h2>LET'S HEAR FROM YOU</h2>
+        <h2>MAKE YOUR ORDER!</h2>
       </Title>
       <Content>
-        <form method="post" action="/contactus">
+        <form method="POST" action="/contactus" onSubmit={handleSubmit}>
           <textarea
             name="customer_message"
             id="customer_message"
-            spellCheck="true"
-            placeholder="type your message here"
-            required="true"
+            spellCheck={true}
+            required={true}
+            onChange={(e) => {
+              setMessageTitle(e.target.value);
+            }}
+            value={messageTitle}
+            autoFocus={display === "block" ? true : false}
           ></textarea>
           <input
             type="text"
             placeholder="your surname"
             name="customer_surname"
-            required="true"
+            required={true}
           ></input>
           <input
             type="text"
@@ -45,7 +82,7 @@ const ContactUsModal = () => {
             type="tel"
             placeholder="your phone number"
             name="customer_tel"
-            required="true"
+            required={true}
           ></input>
           <input
             type="email"

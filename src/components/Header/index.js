@@ -32,8 +32,8 @@ const Header = () => {
           <ContactUsHeader href="/contactus">
             <h3>Contact Us</h3>
           </ContactUsHeader>
-          <SignIn href="/signin">
-            <h3>Sign In</h3>
+          <SignIn href="/login">
+            <h3>Log In</h3>
           </SignIn>
           <Cart cart={cart} href="/cart">
             <img src={cart} alt="cart"></img>

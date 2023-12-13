@@ -6,8 +6,20 @@ export const Wrapper = styled.div`
   overflow: hidden;
   position: fixed;
   display: ${(props) => props.display};
-  background: radial-gradient(rgba(0, 0, 0, 0.7) 41%, rgba(0, 0, 0, 0.3) 70%);
+  background: radial-gradient(rgba(0, 0, 0, 0.5) 65%, rgba(0, 0, 0, 0.5) 100%);
   z-index: 1;
+  animation: myanim 1s;
+
+  @keyframes myanim {
+    from {
+      opacity: 0;
+      transform: rotate(0deg) scale(0);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(1080deg) scale(1);
+    }
+  }
 `;
 
 export const Title = styled.div`
@@ -36,11 +48,7 @@ export const Content = styled.div`
   padding: 5rem;
   margin: auto;
   box-shadow: 1rem;
-  background-image: linear-gradient(
-    to bottom,
-    rgb(255 255 240 / 90%) 65%,
-    rgba(0, 0, 0, 0.65) 100%
-  );
+  background: var(--white);
 
   form {
     display: grid;

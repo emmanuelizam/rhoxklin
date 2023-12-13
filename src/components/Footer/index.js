@@ -11,6 +11,7 @@ import {
   Tooltip,
 } from "./Footer.styles";
 import Facebook from "../../images/icon-facebook.svg";
+import WhatsApp from "../../images/icon-whatsapp.svg";
 import Twitter from "../../images/icon-twitter.svg";
 import Instagram from "../../images/icon-instagram.svg";
 import Mail from "../../images/icon-email.svg";
@@ -50,27 +51,70 @@ const Footer = () => {
           </Services>
           <Bar />
           <Contacts>
-            <a href="www.faceboook.com">
+            <a
+              href="https://web.facebook.com/Rhoxklin/"
+              title="Facebook"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={Facebook} alt="Facebook" />
             </a>
-            <a href="www.twitter.com">
+            <a
+              href="https://wa.me/2348105054701?text=hello"
+              title="WhatsApp"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={WhatsApp} alt="WhatsApp" />
+            </a>
+            <a
+              href="https://www.twitter.com/rhoxklin"
+              title="Twitter"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={Twitter} alt="Twitter" />
             </a>
-            <a href="www.instgram.com">
+            <a
+              href="https://www.instagram.com/rhoxklin/"
+              title="Instagram"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={Instagram} alt="Instagram" />
             </a>
-            <a href="rhoxklin@gmail.com">
+            <a
+              href="mailto:rhoxklin@gmail.com"
+              title="Email"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={Mail} alt="Mail" />
             </a>
 
-            <Tooltip>
-              <img src={Call} alt="05028992233"></img>
-              <h2>05028992233</h2>
-            </Tooltip>
-            <Tooltip>
-              <img src={Office} alt="No. 5 Ugbomanta Street"></img>
-              <h2>No. 5 Ugbomanta Street</h2>
-            </Tooltip>
+            <a
+              href="tel:+2348105054701"
+              title="+2348105054701"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={Call} alt="+2348105054701"></img>
+            </a>
+            <a
+              href="geo:25.245470718844146,51.45400942457904"
+              title="No. 5 Ugbomanta Street"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <a
+                href="geo:25.245470718844146,51.45400942457904"
+                title="No. 5 Ugbomanta Street"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src={Office} alt="No. 5 Ugbomanta Street"></img>
+              </a>
+            </a>
           </Contacts>
         </ServicesContacts>
         <Rights>

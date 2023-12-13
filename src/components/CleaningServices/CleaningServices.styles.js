@@ -72,6 +72,7 @@ export const Service = styled.div`
     padding: 2rem;
     border-radius: 50%;
     animation: animateNames 1s cubic-bezier(0.075, 0.82, 0.165, 0.5);
+    cursor: pointer;
 
     @keyframes animateNames {
       from {

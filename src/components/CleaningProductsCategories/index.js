@@ -8,10 +8,21 @@ import {
   Title,
   Wrapper,
 } from "./CleaningProductsCategories.styles";
+import { Link } from "react-router-dom";
 
 const tools = require("../../images/hands-holding-cleaning-tools-solutions.jpg");
 
-const CleaningProductsCategories = () => {
+const CleaningProductsCategories = ({ setDisplay, setMessageTitle }) => {
+  const myfunction = (event) => {
+    var element = event.target;
+    while (element.className.search(/cleaning_product/) === -1) {
+      element = element.parentNode;
+    }
+    setDisplay("block");
+    setMessageTitle(
+      "I NEED " + element.childNodes[0].innerHTML.toUpperCase() + "\n\n"
+    );
+  };
   return (
     <Wrapper pic={tools}>
       <Title>
@@ -19,16 +30,16 @@ const CleaningProductsCategories = () => {
       </Title>
       <Content>
         <Service>
-          <NameStyle1>
+          <NameStyle1 className="cleaning_product" onClick={myfunction}>
             <h1>Basic Cleaning Products</h1>
           </NameStyle1>
-          <NameStyle2>
+          <NameStyle2 className="cleaning_product" onClick={myfunction}>
             <h1>Cleaning Chemicals </h1>
           </NameStyle2>
-          <NameStyle1>
+          <NameStyle1 className="cleaning_product" onClick={myfunction}>
             <h1>Essential Cleaning Tools</h1>
           </NameStyle1>
-          <NameStyle2>
+          <NameStyle2 className="cleaning_product" onClick={myfunction}>
             <h1>Cleaning Machines </h1>
           </NameStyle2>
         </Service>

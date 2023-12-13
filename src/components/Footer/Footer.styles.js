@@ -84,7 +84,7 @@ export const Contacts = styled.div`
     width: 36px;
     height: auto;
     @media screen and (max-width: 500px) {
-    width: 24px
+      width: 24px;
       height: auto;
     }
   }

@@ -64,13 +64,15 @@ export const Service = styled.div`
   width: 100%;
   height: auto;
 
-  div {
+  a {
     width: 100%;
     display: flex;
     justify-content: center;
     margin: 3rem 0;
     padding: 2rem;
     border-radius: 50%;
+    cursor: pointer;
+    text-decoration: none;
     animation: animateNames 1s cubic-bezier(0.075, 0.82, 0.165, 0.5);
 
     @keyframes animateNames {
@@ -95,12 +97,12 @@ export const Service = styled.div`
   }
 `;
 
-export const NameStyle1 = styled.div`
+export const NameStyle1 = styled.a`
   background-color: var(--white);
   color: var(--blue_dark);
 `;
 
-export const NameStyle2 = styled.div`
+export const NameStyle2 = styled.a`
   background-color: var(--blue_dark);
   color: var(--white);
 `;
