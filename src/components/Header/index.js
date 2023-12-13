@@ -23,19 +23,19 @@ const Header = () => {
         <LogoImg src={logo} alt="Logo"></LogoImg>
         <Bar></Bar>
         <NavigationContent>
-          <Home href="/">
+          <Home href="/rhoxklin/">
             <h3>Home</h3>
           </Home>
           <Services href="#services">
             <h3>Services</h3>
           </Services>
-          <ContactUsHeader href="/contactus">
+          <ContactUsHeader href="/rhoxklin/contactus">
             <h3>Contact Us</h3>
           </ContactUsHeader>
-          <SignIn href="/login">
+          <SignIn href="/rhoxklin/login">
             <h3>Log In</h3>
           </SignIn>
-          <Cart cart={cart} href="/cart">
+          <Cart cart={cart} href="/rhoxklin/cart">
             <img src={cart} alt="cart"></img>
             <span>10</span>
           </Cart>
