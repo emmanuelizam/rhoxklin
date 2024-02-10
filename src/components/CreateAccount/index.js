@@ -87,12 +87,7 @@ const CreateAccount = () => {
             id="login"
             value="Create Account"
           ></input>
-          <input
-            type="button"
-            name="loginInstead"
-            id="loginInstead"
-            value="Already have an account? Login instead."
-          ></input>
+          <a href="/rhoxklin/login">Already have an account? Login instead.</a>
         </form>
       </Content>
       <ContactUsButton href="./contactus">

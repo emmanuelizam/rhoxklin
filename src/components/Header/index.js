@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import cart from "../../images/shopping_cart.png";
 
 import {
@@ -13,10 +13,36 @@ import {
   SignIn,
   Cart,
 } from "./Header.styles";
+import { Context } from "../../context";
+import API from "../../API";
 
-const logo = require("../../images/logo_new21.png");
+const logo = require("../../images/logo.png");
 
 const Header = () => {
+  const [state, setstate, cartNumber, setCartNumber] = useContext(Context);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const getCartItems = async () => {
+      try {
+        const resp = await API.fetchCartItems();
+        if (resp.ok) {
+          resp
+            .json()
+            .then((value) => {
+              setCartNumber(value.length);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      } catch (error) {
+        setError(error);
+        console.log(error);
+      }
+    };
+    getCartItems();
+  }, []);
+
   return (
     <Wrapper>
       <Content>
@@ -29,15 +55,15 @@ const Header = () => {
           <Services href="#services">
             <h3>Services</h3>
           </Services>
-          <ContactUsHeader href="/rhoxklin/#/contactus">
+          <ContactUsHeader href="/rhoxklin/contactus">
             <h3>Contact Us</h3>
           </ContactUsHeader>
-          <SignIn href="/rhoxklin/#/login">
+          <SignIn href="/rhoxklin/login">
             <h3>Log In</h3>
           </SignIn>
-          <Cart cart={cart} href="/rhoxklin/#/cart">
+          <Cart cart={cart} href="/rhoxklin/cart">
             <img src={cart} alt="cart"></img>
-            <span>10</span>
+            <span>{cartNumber}</span>
           </Cart>
         </NavigationContent>
       </Content>

@@ -97,16 +97,17 @@ export const Content = styled.div`
     cursor: pointer;
   }
 
-  #loginInstead {
+  a {
     margin: 1rem;
     width: 50%;
     height: 2rem;
     color: var(--white);
-    background-color: var(--blue_dark);
+    background-color: none;
     align-self: center;
     border-radius: 10px;
     border: none;
-    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
   }
 
   label {

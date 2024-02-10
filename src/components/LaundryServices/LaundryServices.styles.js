@@ -52,11 +52,11 @@ export const ContactUsButton = styled.a`
 
 export const Content = styled.div`
   width: 100%;
-  height: 1080px;
+  height: 1300px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 5rem;
+  padding: 2rem;
 `;
 
 export const Service = styled.div`
@@ -86,6 +86,10 @@ export const Name = styled.div`
   h1 {
     font-size: var(--font_medium);
     color: var(--blue_dark);
+
+    @media screen and (max-width: 720px) {
+      font-size: var(--font_small);
+    }
   }
 `;
 
@@ -98,5 +102,9 @@ export const Description = styled.div`
     padding: 2rem;
     color: var(--white);
     font-size: var(--font_small);
+
+    @media screen and (max-width: 720px) {
+      font-size: var(--font_very_small);
+    }
   }
 `;

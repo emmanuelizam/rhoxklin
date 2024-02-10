@@ -58,7 +58,8 @@ export const Content = styled.div`
     padding: 2rem;
   }
 
-  input[type="text"] {
+  input[type="text"],
+  input[type="tel"] {
     margin: 0rem 1rem 1rem 1rem;
     height: 2rem;
     border-radius: 10px;
@@ -82,18 +83,14 @@ export const Content = styled.div`
     }
   }
 
-  #forgotPassword,
-  #usernameSwitch {
+  #forgotPassword {
     margin: 0 1rem;
     width: fit-content;
     height: 2rem;
     color: var(--white);
-    background-color: var(--blue_dark);
     align-self: flex-end;
-    border-radius: 10px;
     font-style: italic;
     border: none;
-    cursor: pointer;
   }
 
   input[type="submit"] {
@@ -107,16 +104,16 @@ export const Content = styled.div`
     cursor: pointer;
   }
 
-  #noAccount {
+  a {
     margin: 1rem;
     width: 50%;
     height: 2rem;
     color: var(--white);
-    background-color: var(--blue_dark);
+    background-color: none;
     align-self: center;
-    border-radius: 10px;
     border: none;
-    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
   }
 
   label {

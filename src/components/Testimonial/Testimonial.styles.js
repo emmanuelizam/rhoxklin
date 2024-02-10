@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: auto;
   background-color: var(--gray);
+  position: relative;
 `;
 
 export const Title = styled.div`
@@ -29,66 +30,90 @@ export const Content = styled.div`
   height: auto;
   padding: 1rem;
   background: transparent;
+
+  a {
+    position: relative;
+    top: 50%;
+    font-weight: 900;
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: var(--blue_light);
+    font-size: var(--font_medium);
+    transition: ease 0.5s;
+    cursor: pointer;
+
+    @media screen and (max-width: 500px) {
+      font-size: var(--font_very_small);
+      padding: 0.2rem;
+    }
+
+    :hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
 `;
 
 export const Testimony = styled.div`
-  display: flex;
-  width: 60%;
+  display: ${({ display }) => display};
+  width: 80%;
+  animation: change 1s linear;
 
-  img {
-    width: 30%;
-    height: auto;
+  @keyframes change {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   div {
-    width: auto;
+    width: 100%;
     background-color: var(--white);
     p {
       font-size: var(--font_very_small);
+      i {
+        font-size: xx-small;
+      }
       color: var(--blue_dark);
       @media screen and (max-width: 500px) {
         font-size: 0.5rem;
       }
     }
   }
-`;
-export const LeftArrow = styled.div`
-  border-right: 4rem solid var(--blue_dark);
-  border-top: 2rem solid transparent;
-  border-bottom: 2rem solid transparent;
 
-  @media screen and (max-width: 500px) {
-    border-right: 2rem solid var(--blue_dark);
-    border-top: 1rem solid transparent;
-    border-bottom: 1rem solid transparent;
+  img {
+    width: 30%;
+    height: auto;
   }
 `;
-export const RightArrow = styled.div`
-  border-left: 4rem solid var(--blue_dark);
-  border-top: 2rem solid transparent;
-  border-bottom: 2rem solid transparent;
-
-  @media screen and (max-width: 500px) {
-    border-left: 2rem solid var(--blue_dark);
-    border-top: 1rem solid transparent;
-    border-bottom: 1rem solid transparent;
-  }
+export const LeftArrow = styled.a`
+  left: 10%;
+`;
+export const RightArrow = styled.a`
+  right: 10%;
 `;
 
 export const Scroll = styled.div`
   display: flex;
   justify-content: center;
   background-color: transparent;
+`;
 
-  div {
-    height: 0.7rem;
-    width: 0.7rem;
-    background-color: var(--blue_dark);
-    border-radius: 50%;
-    margin: 1rem;
-    border: 0.2rem solid var(--blue_dark);
-    :hover {
-      background-color: var(--white);
+export const Dot = styled.div`
+  height: 0.7rem;
+  width: 0.7rem;
+  background-color: ${({ display }) => {
+    if (display === "none") {
+      return "white";
+    } else {
+      return "#038FCD";
     }
+  }};
+  border-radius: 50%;
+  margin: 1rem;
+  border: 0.2rem solid var(--blue_dark);
+  :hover {
+    background-color: var(--white);
   }
 `;

@@ -85,8 +85,8 @@ export const Content = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  overflow: auto;
   position: relative;
+  overflow: auto;
 `;
 
 export const Menu = styled.div`
@@ -94,8 +94,7 @@ export const Menu = styled.div`
   flex-direction: column;
   width: 50%;
   background-color: var(--white);
-  border: 1px solid var(--green);
-  border-radius: 20px;
+  z-index: 1;
 
   button {
     font-size: var(--font_small);
@@ -146,7 +145,11 @@ export const Menu = styled.div`
 
 export const List = styled.table`
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border: solid var(--red) 1px;
+  border-radius: 20px;
+  z-index: 2;
+  overflow: auto;
 
   tr {
     padding: 4rem;
@@ -155,15 +158,19 @@ export const List = styled.table`
     :nth-child(odd) {
       background-color: var(--gray);
     }
+    :nth-last-child(1) td:nth-child(1) {
+      border-bottom-left-radius: 20px;
+    }
 
-    :hover {
-      background-color: var(--green);
+    :nth-last-child(1) td:nth-last-child(1) {
+      border-bottom-right-radius: 20px;
     }
 
     th,
     td {
       width: auto;
-      color: var(--blue_dark);
+      border: solid var(--red) 1px;
+      color: var(--green);
       padding: 1rem;
       text-align: left;
 
@@ -172,7 +179,15 @@ export const List = styled.table`
       }
     }
     th {
-      background-color: var(--red);
+      background-color: var(--blue_dark);
+      color: var(--white);
+      font-weight: 700;
+      :nth-child(1) {
+        border-top-left-radius: 20px;
+      }
+      :nth-last-child(1) {
+        border-top-right-radius: 20px;
+      }
     }
   }
 `;

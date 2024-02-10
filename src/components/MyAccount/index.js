@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ContactUsButton,
   Content,
@@ -9,154 +10,179 @@ import {
   List,
 } from "./MyAccount.styles";
 
-const MyAccount = () => {
-  var formProto = (
-    <Form method="post">
-      <label for="firstname">First name: </label>
-      <input
-        type="text"
-        name="firstname"
-        id="firstname"
-        placeholder="Enter your first name"
-        required="required"
-        disabled
-      />
-      <br />
-      <label for="surname">Surname: </label>
-      <input
-        type="text"
-        name="surname"
-        id="surname"
-        placeholder="Enter your surname"
-        required="required"
-        disabled
-      />
-      <br />
-      <label for="phoneNumber">Phone Number: </label>
-      <input
-        type="tel"
-        name="phoneNumber"
-        id="phoneNumber"
-        placeholder="Enter your phone number"
-        required="required"
-        disabled
-      />
-      <br />
-      <label for="email">Email: </label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        placeholder="Enter your Email"
-        required="required"
-        disabled
-      />
-      <br />
-      <label for="address">Address: </label>
-      <input
-        type="address"
-        name="address"
-        id="address"
-        placeholder="Enter your Address"
-        required="required"
-        disabled
-      />
-      <br />
-      <label for="password">Password: </label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Enter your password"
-        required="required"
-        minLength="8"
-        disabled
-      />
-      <br />
-      <br />
-      <input type="button" name="edit" id="edit" value="Edit" />
-      <input type="button" name="save" id="save" value="Save" />
-    </Form>
+import API from "../../API";
+import { Context } from "../../context";
+
+const getCurrentUserDetails = async (user, setAccountDetails, navigate) => {
+  try {
+    const token = sessionStorage.getItem("token");
+    const id = sessionStorage.getItem("id");
+    if (token) {
+      const res = await API.fetchCurrentUserDetails({
+        token: token,
+        id: id,
+      });
+      if (res.ok) {
+        const account = await res.json();
+        setAccountDetails(
+          <List>
+            <tr>
+              {Object.keys(account) ? (
+                Object.keys(account).map((key) => <th>{key}</th>)
+              ) : (
+                <th>No data</th>
+              )}
+            </tr>
+
+            <tr>
+              {Object.keys(account) ? (
+                Object.keys(account).map((key) => <td>{account[key]}</td>)
+              ) : (
+                <td>No data</td>
+              )}
+            </tr>
+          </List>
+        );
+      } else {
+        navigate("/rhoxklin/login");
+      }
+    } else {
+      navigate("/rhoxklin/login");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getMessages = async (setAccountDetails, navigate) => {
+  try {
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      const res = await API.fetchMessages({
+        token: token,
+      });
+      if (res.ok) {
+        const messages = await res.json();
+        setAccountDetails(
+          <>
+            {messages.length > 0 ? (
+              <List>
+                <tr>
+                  {Object.keys(messages[0]) ? (
+                    Object.keys(messages[0]).map((key) => <th>{key}</th>)
+                  ) : (
+                    <th>No data</th>
+                  )}
+                </tr>
+                {messages.map((entry) => (
+                  <tr>
+                    {Object.keys(entry) ? (
+                      Object.keys(entry).map((key) => <td>{entry[key]}</td>)
+                    ) : (
+                      <td>No data</td>
+                    )}
+                  </tr>
+                ))}
+              </List>
+            ) : (
+              <table></table>
+            )}
+          </>
+        );
+      } else {
+        navigate("/rhoxklin/login");
+      }
+    } else {
+      navigate("/rhoxklin/login");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const GetCustomers = async (setAccountDetails, navigate) => {
+  const [customers, setCustomers] = useState([]);
+  try {
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      const res = await API.fetchCustomers({
+        token: token,
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setCustomers(data);
+      } else {
+        navigate("/rhoxklin/login");
+      }
+    } else {
+      navigate("/rhoxklin/login");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return (
+    <>
+      {customers.length > 0 ? (
+        <List>
+          <tr>
+            {Object.keys(customers[0]) ? (
+              Object.keys(customers[0]).map((key) => <th>{key}</th>)
+            ) : (
+              <th>No data</th>
+            )}
+          </tr>
+          {customers.map((entry) => (
+            <tr>
+              {Object.keys(entry) ? (
+                Object.keys(entry).map((key) => <td>{entry[key]}</td>)
+              ) : (
+                <td>No data</td>
+              )}
+            </tr>
+          ))}
+        </List>
+      ) : (
+        <table></table>
+      )}
+    </>
   );
+};
+
+const MyAccount = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useContext(Context);
+  const [accountDetails, setAccountDetails] = useState();
+  const [customers, setCustomers] = useState(false);
+  const [staffs, setStaffs] = useState([]);
+  const [cleaningMachines, setCleaningMachines] = useState([]);
+
   return (
     <Wrapper>
       <Title>
         <h2>My Account</h2>
       </Title>
-      <div id="id01" class="modal">
-        <Form method="post">
-          <label for="firstname">First name: </label>
-          <input
-            type="text"
-            name="firstname"
-            id="firstname"
-            placeholder="Enter your first name"
-            required="required"
-            disabled
-          />
-          <br />
-          <label for="surname">Surname: </label>
-          <input
-            type="text"
-            name="surname"
-            id="surname"
-            placeholder="Enter your surname"
-            required="required"
-            disabled
-          />
-          <br />
-          <label for="phoneNumber">Phone Number: </label>
-          <input
-            type="tel"
-            name="phoneNumber"
-            id="phoneNumber"
-            placeholder="Enter your phone number"
-            required="required"
-            disabled
-          />
-          <br />
-          <label for="email">Email: </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter your Email"
-            required="required"
-            disabled
-          />
-          <br />
-          <label for="address">Address: </label>
-          <input
-            type="address"
-            name="address"
-            id="address"
-            placeholder="Enter your Address"
-            required="required"
-            disabled
-          />
-          <br />
-          <label for="password">Password: </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter your password"
-            required="required"
-            minLength="8"
-            disabled
-          />
-          <br />
-          <br />
-          <input type="button" name="edit" id="edit" value="Edit" />
-          <input type="button" name="save" id="save" value="Save" />
-        </Form>
-      </div>
       <Content>
         <Menu>
-          <button>
+          <button
+            onClick={() => {
+              getCurrentUserDetails(user, setAccountDetails, navigate);
+            }}
+          >
             <span>Account Details </span>
           </button>
-          <button>
+          <button
+            onClick={() => {
+              getMessages(setAccountDetails, navigate);
+            }}
+          >
+            <span>Messages </span>
+          </button>
+          <button
+            onClick={() => {
+              setCustomers(true);
+            }}
+          >
             <span>Customers </span>
           </button>
           <button>
@@ -166,113 +192,7 @@ const MyAccount = () => {
             <span>Cleaning Machines </span>
           </button>
         </Menu>
-        <List>
-          <tr>
-            <th>head1</th>
-            <th>head1</th>
-            <th>head1</th>
-            <th>head1</th>
-          </tr>
-
-          <tr>
-            <td>
-              <a href="#id01">hi</a>
-            </td>
-            <td>
-              <a href="#id01">hi</a>
-            </td>
-
-            <td>
-              <a href="#id01">hi</a>
-            </td>
-
-            <td>
-              <a href="#id01">hi</a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a href="#id01">hi</a>
-            </td>
-            <td>
-              <a href="#id01">hi</a>
-            </td>
-
-            <td>
-              <a href="#id01">hi</a>
-            </td>
-
-            <td>
-              <a href="#id01">hi</a>
-            </td>
-          </tr>
-        </List>
-        {/* <Form method="post">
-          <label for="firstname">First name: </label>
-          <input
-            type="text"
-            name="firstname"
-            id="firstname"
-            placeholder="Enter your first name"
-            required="required"
-            disabled
-          />
-          <br />
-          <label for="surname">Surname: </label>
-          <input
-            type="text"
-            name="surname"
-            id="surname"
-            placeholder="Enter your surname"
-            required="required"
-            disabled
-          />
-          <br />
-          <label for="phoneNumber">Phone Number: </label>
-          <input
-            type="tel"
-            name="phoneNumber"
-            id="phoneNumber"
-            placeholder="Enter your phone number"
-            required="required"
-            disabled
-          />
-          <br />
-          <label for="email">Email: </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter your Email"
-            required="required"
-            disabled
-          />
-          <br />
-          <label for="address">Address: </label>
-          <input
-            type="address"
-            name="address"
-            id="address"
-            placeholder="Enter your Address"
-            required="required"
-            disabled
-          />
-          <br />
-          <label for="password">Password: </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter your password"
-            required="required"
-            minLength="8"
-            disabled
-          />
-          <br />
-          <br />
-          <input type="button" name="edit" id="edit" value="Edit" />
-          <input type="button" name="save" id="save" value="Save" />
-        </Form> */}
+        {accountDetails}
       </Content>
       <ContactUsButton href="./contactus">
         <h2>CONTACT US</h2>

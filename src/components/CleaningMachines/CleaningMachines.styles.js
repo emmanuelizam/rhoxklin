@@ -21,6 +21,10 @@ export const Title = styled.div`
     color: var(--white);
     padding: 1rem;
     margin: 0rem;
+
+    @media screen and (max-width: 720px) {
+      font-size: var(--font_small);
+    }
   }
 `;
 
@@ -47,7 +51,7 @@ export const Content = styled.div`
   width: 100%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 10px 20px;
   padding: 2rem;
 `;

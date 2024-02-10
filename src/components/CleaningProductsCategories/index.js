@@ -39,7 +39,7 @@ const CleaningProductsCategories = ({ setDisplay, setMessageTitle }) => {
           <NameStyle1 className="cleaning_product" onClick={myfunction}>
             <h1>Essential Cleaning Tools</h1>
           </NameStyle1>
-          <NameStyle2 className="cleaning_product" onClick={myfunction}>
+          <NameStyle2 className="cleaning_product" href="./cleaningmachines">
             <h1>Cleaning Machines </h1>
           </NameStyle2>
         </Service>

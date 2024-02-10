@@ -57,7 +57,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 5rem;
+  padding: 2rem;
 `;
 
 export const Service = styled.div`
@@ -70,7 +70,7 @@ export const Service = styled.div`
     justify-content: center;
     margin: 3rem 0;
     padding: 2rem;
-    border-radius: 50%;
+    border-radius: 20%;
     cursor: pointer;
     text-decoration: none;
     animation: animateNames 1s cubic-bezier(0.075, 0.82, 0.165, 0.5);

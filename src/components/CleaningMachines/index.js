@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import API from "../../API";
 import {
   ContactUsButton,
   Content,
@@ -9,64 +10,130 @@ import {
   Wrapper,
   Price,
 } from "./CleaningMachines.styles";
+import { Context } from "../../context";
 
 const CleaningMachines = () => {
+  const [cleaningMachines, setCleaningMachines] = useState([]);
+  const [addedToCart, setAddedToCart] = useState({});
+  const [state, setstate, cartNumber, setCartNumber] = useContext(Context);
+  const addToCart = async (machine_id) => {
+    const cart = addedToCart;
+    try {
+      const resp = await API.addCleaningMachineToCart(machine_id);
+      if (resp.ok) {
+        resp
+          .json()
+          .then((data) => {
+            if (data.id) {
+              document.getElementById(machine_id).innerHTML = "Remove";
+              cart[`${machine_id}`] = data.id;
+              setAddedToCart(cart);
+              setCartNumber(cartNumber + 1);
+            } else {
+              console.log(data.message);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeFromCart = async (cart_id, machine_id) => {
+    const cart = addedToCart;
+    try {
+      const resp = await API.removeCleaningMachineFromCart(cart_id);
+      if (resp.ok) {
+        resp
+          .json()
+          .then((data) => {
+            document.getElementById(machine_id).innerHTML = "Add to Cart";
+            cart[`${machine_id}`] = null;
+            setAddedToCart(cart);
+            setCartNumber(cartNumber - 1);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    const getCleaningMachines = async () => {
+      try {
+        const resp = await API.fetchCleaningMachines();
+        if (resp.ok) {
+          resp
+            .json()
+            .then((value) => {
+              setCleaningMachines(value);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCleaningMachines();
+  }, []);
   return (
     <Wrapper>
       <Title>
         <h2>CLEANING MACHINES</h2>
       </Title>
       <Content>
-        <Item>
-          <Details>
-            <p>
-              Portable Petrol Power Washer High Pressure lagos Gasoline High
-              Pressure Car Washers – 6.5hp
-            </p>
-          </Details>
-          <Price>
-            <span>₦230,000.00</span>
-          </Price>
-          <AddToCart>
-            <span>Add to Cart</span>
-          </AddToCart>
-        </Item>
-        <Item>
-          <Details>
-            <p>Ingco High Pressure Washer 2800W (HPWR20008)</p>
-          </Details>
-          <Price>
-            <span>₦230,000.000</span>
-          </Price>
-          <AddToCart>
-            <span>Add to Cart</span>
-          </AddToCart>
-        </Item>
-        <Item>
-          <Details>
-            <p>
-              ingco high pressure washer 3000w price in lagos nigeria Ingco High
-              Pressure Washer 3000W (HPWR30008)
-            </p>
-          </Details>
-          <Price>
-            <span>₦485,000.00</span>
-          </Price>
-          <AddToCart>
-            <span>Add to Cart</span>
-          </AddToCart>
-        </Item>
-        <Item>
-          <Details>
-            <p>carpet dryer, sofa dryer Carpet Dryer</p>
-          </Details>
-          <Price>
-            <span>₦190,000.00</span>
-          </Price>
-          <AddToCart>
-            <span>Add to Cart</span>
-          </AddToCart>
-        </Item>
+        {cleaningMachines.length > 0 ? (
+          cleaningMachines.map((machine) => (
+            <Item>
+              <Details>
+                <p>{machine.name}</p>
+              </Details>
+              <Price>
+                <span>₦{machine.price}</span>
+              </Price>
+              <AddToCart
+                onClick={async (event) => {
+                  const machine_id = event.target.childNodes[0].id;
+                  if (!addedToCart[`${machine_id}`]) {
+                    await addToCart(machine.id);
+                  } else {
+                    await removeFromCart(
+                      addedToCart[`${machine_id}`],
+                      machine_id
+                    );
+                  }
+                }}
+              >
+                <span
+                  key={machine.id}
+                  id={machine.id}
+                  onClick={async (event) => {
+                    const machine_id = event.target.id;
+                    if (!addedToCart[`${machine_id}`]) {
+                      await addToCart(machine.id);
+                    } else {
+                      await removeFromCart(
+                        addedToCart[`${machine_id}`],
+                        machine_id
+                      );
+                    }
+                  }}
+                >
+                  Add to Cart
+                </span>
+              </AddToCart>
+            </Item>
+          ))
+        ) : (
+          <h1>Loading...</h1>
+        )}
       </Content>
       <ContactUsButton href="./contactus">
         <h2>BUY NOW</h2>

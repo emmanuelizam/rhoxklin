@@ -1,5 +1,5 @@
 import React from "react";
-import Hero from "../../images/rhoxklin_mockup1.png";
+import Hero from "../../images/rhoxklin_mockup1.jpg";
 import { Wrapper, Content } from "./HeroImage.styles";
 
 const HeroImage = () => {

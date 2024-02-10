@@ -47,12 +47,11 @@ export const ContactUsButton = styled.a`
 
 export const Content = styled.div`
   width: 100%;
-  height: 1080px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 5rem;
-  overflow-y: auto;
 `;
 
 export const Service = styled.div`
