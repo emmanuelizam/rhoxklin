@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   height: auto;
   background-color: var(--gray);
   position: relative;
+  z-index: 1;
 `;
 
 export const Title = styled.div`
@@ -70,6 +71,8 @@ export const Testimony = styled.div`
   div {
     width: 100%;
     background-color: var(--white);
+    text-overflow: ellipsis;
+
     p {
       font-size: var(--font_very_small);
       i {
