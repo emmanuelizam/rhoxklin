@@ -19,29 +19,18 @@ import API from "../../API";
 const logo = require("../../images/logo.png");
 
 const Header = () => {
-  const [state, setstate, cartNumber, setCartNumber] = useContext(Context);
-  const [error, setError] = useState(null);
+  const [state, setstate, localCart, setLocalCart] = useContext(Context);
+  const [localCartLength, setLocalCartLength] = useState(localCart.length);
   useEffect(() => {
     const getCartItems = async () => {
       try {
-        const resp = await API.fetchCartItems();
-        if (resp.ok) {
-          resp
-            .json()
-            .then((value) => {
-              setCartNumber(value.length);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
+        setLocalCartLength(localCart.length);
       } catch (error) {
-        setError(error);
         console.log(error);
       }
     };
     getCartItems();
-  }, []);
+  }, [localCart]);
 
   return (
     <Wrapper>
@@ -63,7 +52,7 @@ const Header = () => {
           </SignIn>
           <Cart cart={cart} href="/rhoxklin/cart">
             <img src={cart} alt="cart"></img>
-            <span>{cartNumber}</span>
+            <span>{localCartLength}</span>
           </Cart>
         </NavigationContent>
       </Content>

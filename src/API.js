@@ -29,6 +29,13 @@ const fetchCustomers = (token) => {
   });
 };
 
+const fetchStaffs = (token) => {
+  return fetch(`http://localhost:5000/protected-api/staff`, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token.token}` },
+  });
+};
+
 const postMessage = (message) => {
   return fetch("http://localhost:5000/api/staffcustomermessage", {
     method: "POST",
@@ -78,6 +85,7 @@ const API = {
   addCleaningMachineToCart,
   removeCleaningMachineFromCart,
   fetchCartItems,
+  fetchStaffs,
 };
 
 export default API;

@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: auto;
+  height: 100%;
   overflow: hidden;
   background-color: var(--white);
-  .modal {
+  z-index: 1;
+  #modal {
     width: 100%;
     height: 100%;
     display: none;
@@ -15,11 +16,11 @@ export const Wrapper = styled.div`
     overflow: auto;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
-    z-index: 1;
-    opacity: 0;
+    z-index: 2;
+    opacity: 1;
     transition-property: opacity;
 
-    a {
+    button {
       float: right;
       font-weight: 600;
       position: absolute;
@@ -29,6 +30,8 @@ export const Wrapper = styled.div`
       background-color: var(--gray);
       color: var(--red);
       padding: 5px;
+      border: none;
+      cursor: pointer;
       font-size: var(--font_small);
 
       :hover {
@@ -36,26 +39,21 @@ export const Wrapper = styled.div`
       }
     }
   }
-  .modal:target {
-    display: block;
-    position: fixed;
-    opacity: 1;
+  #modal:target {
+    display: none;
   }
 `;
 
 export const Title = styled.div`
-  background: radial-gradient(
-    rgba(3, 143, 205, 1) 40%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+  background: var(--blue_dark);
   width: fit-content;
-  margin: 3rem auto;
-  border-radius: 2rem;
+  margin: 1rem 0 1.5rem 0;
+  border-radius: 10%;
   overflow: hidden;
   h2 {
     font-size: var(--font_medium);
     color: var(--white);
-    padding: 1rem;
+    padding: 0.5rem;
     margin: 0rem;
   }
 `;
@@ -81,28 +79,29 @@ export const ContactUsButton = styled.a`
 
 export const Content = styled.div`
   width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: relative;
-  overflow: auto;
+  height: min-content;
+  display: inline-block;
+  padding: 4rem 0;
 `;
 
-export const Menu = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  background-color: var(--white);
-  z-index: 1;
-
+export const Menu = styled.nav`
+  width: 20%;
+  height: 35rem;
+  background-color: var(--blue_dark);
+  padding: 0;
+  margin: 0 4rem 0 0;
+  border: solid var(--green);
+  display: block;
+  float: left;
   button {
     font-size: var(--font_small);
-    color: var(--blue_dark);
+    color: var(--white);
     background-color: transparent;
+    width: 100%;
     border: none;
     padding: 2rem 0;
-    border-radius: 20px 20px 20px 20px;
+    text-align: left;
+    outline: none;
     cursor: pointer;
 
     :active,
@@ -128,11 +127,17 @@ export const Menu = styled.div`
     }
 
     :hover {
-      background-color: var(--gray);
+      background-color: var(--blue_light);
+      color: white;
     }
 
     @media screen and (max-width: 900px) {
       font-size: var(--font_very_small);
+    }
+
+    span {
+      margin: auto;
+      padding: 1rem;
     }
 
     span:after {
@@ -143,27 +148,20 @@ export const Menu = styled.div`
   }
 `;
 
-export const List = styled.table`
-  width: 100%;
+export const List = styled.div`
+  height: 30rem;
+  overflow: auto;
+`;
+
+export const Table = styled.table`
   border-collapse: separate;
   border: solid var(--red) 1px;
-  border-radius: 20px;
-  z-index: 2;
-  overflow: auto;
-
   tr {
     padding: 4rem;
     background-color: var(--white);
     cursor: pointer;
     :nth-child(odd) {
       background-color: var(--gray);
-    }
-    :nth-last-child(1) td:nth-child(1) {
-      border-bottom-left-radius: 20px;
-    }
-
-    :nth-last-child(1) td:nth-last-child(1) {
-      border-bottom-right-radius: 20px;
     }
 
     th,
@@ -182,24 +180,22 @@ export const List = styled.table`
       background-color: var(--blue_dark);
       color: var(--white);
       font-weight: 700;
-      :nth-child(1) {
-        border-top-left-radius: 20px;
-      }
-      :nth-last-child(1) {
-        border-top-right-radius: 20px;
-      }
     }
   }
 `;
 
 export const Form = styled.form`
-  display: flex;
   width: 100%;
   background-color: var(--blue_light);
-  flex-direction: column;
-  padding: 2rem;
+  padding: 1rem;
+  margin: 2rem;
   border-radius: 20px;
-
+  display: block;
+  label {
+    display: block;
+    padding: 0.5rem;
+    color: var(--white);
+  }
   input[type="text"],
   input[type="email"],
   input[type="address"],
@@ -225,10 +221,5 @@ export const Form = styled.form`
     align-self: center;
     border-radius: 10px;
     cursor: pointer;
-  }
-
-  label {
-    color: var(--white);
-    margin: 1rem 1rem 0.5rem 1rem;
   }
 `;

@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   height: auto;
   background-color: var(--gray);
   position: relative;
-  z-index: 1;
 `;
 
 export const Title = styled.div`

@@ -14,55 +14,87 @@ import { Context } from "../../context";
 
 const CleaningMachines = () => {
   const [cleaningMachines, setCleaningMachines] = useState([]);
-  const [addedToCart, setAddedToCart] = useState({});
-  const [state, setstate, cartNumber, setCartNumber] = useContext(Context);
+  const [state, setstate, localCart, setLocalCart] = useContext(Context);
+
   const addToCart = async (machine_id) => {
-    const cart = addedToCart;
-    try {
-      const resp = await API.addCleaningMachineToCart(machine_id);
-      if (resp.ok) {
-        resp
-          .json()
-          .then((data) => {
-            if (data.id) {
-              document.getElementById(machine_id).innerHTML = "Remove";
-              cart[`${machine_id}`] = data.id;
-              setAddedToCart(cart);
-              setCartNumber(cartNumber + 1);
-            } else {
-              console.log(data.message);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+    const cart = localCart; // create a copy of the local cart and modify that copy
+    const machine = cleaningMachines.find(
+      (value) => value.id === parseInt(machine_id)
+    );
+    // if the user is not logged in persist data in localStorage
+    if (!state) {
+      document.getElementById(machine_id).innerHTML = "Remove";
+      cart.push(machine);
+      setLocalCart([...cart]);
+    } else {
+      // else persist data in server
+      try {
+        const resp = await API.addCleaningMachineToCart(machine_id);
+        if (resp.ok) {
+          resp
+            .json()
+            .then((data) => {
+              if (data.id) {
+                document.getElementById(machine_id).innerHTML = "Remove";
+                cart.push(machine);
+                setLocalCart(cart);
+              } else {
+                console.log(data.message);
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
-  const removeFromCart = async (cart_id, machine_id) => {
-    const cart = addedToCart;
-    try {
-      const resp = await API.removeCleaningMachineFromCart(cart_id);
-      if (resp.ok) {
-        resp
-          .json()
-          .then((data) => {
-            document.getElementById(machine_id).innerHTML = "Add to Cart";
-            cart[`${machine_id}`] = null;
-            setAddedToCart(cart);
-            setCartNumber(cartNumber - 1);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+  const removeFromCart = async (machine_id) => {
+    // if the user is not logged in, simply persist data in localStorage
+    if (!state) {
+      const cart = localCart.filter(
+        (value) => value.id !== parseInt(machine_id)
+      );
+      document.getElementById(machine_id).innerHTML = "Add to Cart";
+      setLocalCart([...cart]);
+    } else {
+      // if user is logged in, persist data in server
+      try {
+        const cart = localCart.filter(
+          (value) => value.ProductId !== parseInt(machine_id)
+        );
+        const cartItem = localCart.find(
+          (value) => value.ProductId === parseInt(machine_id)
+        );
+        const resp = await API.removeCleaningMachineFromCart(cartItem.id);
+        if (resp.ok) {
+          resp
+            .json()
+            .then((data) => {
+              document.getElementById(machine_id).innerHTML = "Add to Cart";
+              setLocalCart(cart);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
+  const addOrRemove = async (elt) => {
+    const machine_id = elt.id;
+    if (elt.innerHTML === "Add to Cart") {
+      await addToCart(machine_id);
+    } else if (elt.innerHTML === "Remove") {
+      await removeFromCart(machine_id);
+    }
+  };
+
   useEffect(() => {
     const getCleaningMachines = async () => {
       try {
@@ -91,7 +123,7 @@ const CleaningMachines = () => {
       <Content>
         {cleaningMachines.length > 0 ? (
           cleaningMachines.map((machine) => (
-            <Item>
+            <Item key={machine.id}>
               <Details>
                 <p>{machine.name}</p>
               </Details>
@@ -100,33 +132,20 @@ const CleaningMachines = () => {
               </Price>
               <AddToCart
                 onClick={async (event) => {
-                  const machine_id = event.target.childNodes[0].id;
-                  if (!addedToCart[`${machine_id}`]) {
-                    await addToCart(machine.id);
-                  } else {
-                    await removeFromCart(
-                      addedToCart[`${machine_id}`],
-                      machine_id
-                    );
-                  }
+                  const elt = event.target.childNodes[0];
+                  await addOrRemove(elt);
                 }}
               >
                 <span
-                  key={machine.id}
                   id={machine.id}
                   onClick={async (event) => {
-                    const machine_id = event.target.id;
-                    if (!addedToCart[`${machine_id}`]) {
-                      await addToCart(machine.id);
-                    } else {
-                      await removeFromCart(
-                        addedToCart[`${machine_id}`],
-                        machine_id
-                      );
-                    }
+                    const elt = event.target;
+                    await addOrRemove(elt);
                   }}
                 >
-                  Add to Cart
+                  {localCart.find((v) => v.id === machine.id)
+                    ? "Remove"
+                    : "Add to Cart"}
                 </span>
               </AddToCart>
             </Item>

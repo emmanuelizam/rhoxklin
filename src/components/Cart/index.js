@@ -13,24 +13,23 @@ import API from "../../API";
 import { Context } from "../../context";
 
 const Cart = ({ setDisplay, setMessageTitle, Loader }) => {
-  const [state, setstate, cartNumber, setCartNumber] = useContext(Context);
-  const [cartItems, setCartItems] = useState([]);
+  const [state, setstate, localCart, setLocalCart] = useContext(Context);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const buyNow = (event) => {
     var message = "";
-    cartItems.forEach((item, index) => {
+    localCart.forEach((item, index) => {
       var number = index + 1;
       message =
         message +
         number +
         ") " +
-        item.quantity +
-        " " +
-        item.Product.name +
+        // item.quantity +
+        // " " +
+        item.name +
         " at  ₦" +
-        item.Product.price +
+        item.price +
         " per piece\n\n";
     });
     console.log(message);
@@ -39,27 +38,29 @@ const Cart = ({ setDisplay, setMessageTitle, Loader }) => {
   };
 
   const removeFromCart = async (cart_id) => {
-    const cart = cartItems;
-    try {
-      const resp = await API.removeCleaningMachineFromCart(cart_id);
-      if (resp.ok) {
-        resp
-          .json()
-          .then((data) => {
-            setCartItems(
-              cartItems.filter((item) => item.id !== parseInt(cart_id))
-            );
-            // this is done because seCartItems will not decrease cartItems by 1 immediately
-            // but we know that having reached this point, the operation will be done
-            setCartNumber(cartItems.length - 1);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+    // if the user is not logged in, persist the data in local storage else store it in the server
+    if (!state) {
+      const cart = localCart.filter((item) => item.id !== parseInt(cart_id));
+      setLocalCart([...cart]);
+    } else {
+      try {
+        const resp = await API.removeCleaningMachineFromCart(cart_id);
+        if (resp.ok) {
+          resp
+            .json()
+            .then((data) => {
+              setLocalCart(
+                localCart.filter((item) => item.id !== parseInt(cart_id))
+              );
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      } catch (error) {
+        setError(error);
+        console.log(error);
       }
-    } catch (error) {
-      setError(error);
-      console.log(error);
     }
   };
 
@@ -71,7 +72,7 @@ const Cart = ({ setDisplay, setMessageTitle, Loader }) => {
           resp
             .json()
             .then((value) => {
-              setCartItems(value);
+              setLocalCart(value);
               setLoading(false);
             })
             .catch((error) => {
@@ -83,8 +84,13 @@ const Cart = ({ setDisplay, setMessageTitle, Loader }) => {
         console.log(error);
       }
     };
-    getCartItems();
-  }, {});
+    if (state) {
+      getCartItems();
+    } else {
+      // if the user is not logged in, simply use the localCart available in localStorage
+      setLoading(false);
+    }
+  }, []);
   return (
     <Wrapper>
       <Title>
@@ -92,10 +98,10 @@ const Cart = ({ setDisplay, setMessageTitle, Loader }) => {
       </Title>
       <Content>
         {!loading ? (
-          cartItems.map((item, index) => (
+          localCart.map((item, index) => (
             <Service key={item.id}>
               <Name>
-                <h1>{item.Product.name}</h1>
+                <h1>{item.name}</h1>
               </Name>
               <Remove
                 id={item.id}
@@ -111,7 +117,7 @@ const Cart = ({ setDisplay, setMessageTitle, Loader }) => {
           <Loader />
         )}
       </Content>
-      {cartItems.length > 0 ? (
+      {localCart.length > 0 ? (
         <ContactUsButton onClick={buyNow}>
           <h2>BUY NOW</h2>
         </ContactUsButton>
