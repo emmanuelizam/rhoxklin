@@ -1,7 +1,7 @@
 import Utils from "./Utils";
 
 const authenticate = (credentials) => {
-  return fetch("http://localhost:5000/api/login", {
+  return fetch("http://localhost:5000/protected-api/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials),
