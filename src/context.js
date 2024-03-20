@@ -22,16 +22,7 @@ export const UserProvider = ({ children }) => {
   }, [localCart, localCart.length]);
 
   return (
-    <Context.Provider
-      value={[
-        state,
-        setstate,
-        //cartNumber,
-        //setCartNumber,
-        localCart,
-        setLocalCart,
-      ]}
-    >
+    <Context.Provider value={[state, setstate, localCart, setLocalCart]}>
       {children}
     </Context.Provider>
   );

@@ -6,53 +6,98 @@ export const Wrapper = styled.div`
   overflow: hidden;
   background-color: var(--white);
   z-index: 1;
-  #modal {
-    width: 100%;
-    height: 100%;
-    display: none;
-    left: 0;
-    top: 0;
-    position: fixed;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 2;
-    opacity: 1;
-    transition-property: opacity;
+`;
+export const Modal = styled.div`
+  width: 100%;
+  height: 100%;
+  display: none;
+  left: 0;
+  top: 0;
+  position: fixed;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  opacity: 1;
+  transition-property: opacity;
 
-    button {
-      float: right;
-      font-weight: 600;
-      position: absolute;
-      right: 20px;
-      top: 10px;
-      text-decoration: none;
-      background-color: var(--gray);
-      color: var(--red);
-      padding: 5px;
-      border: none;
-      cursor: pointer;
-      font-size: var(--font_small);
+  button {
+    float: right;
+    font-weight: 600;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    text-decoration: none;
+    background-color: var(--gray);
+    color: var(--red);
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font_small);
 
-      :hover {
-        background-color: var(--green);
-      }
+    :hover {
+      background-color: var(--green);
     }
   }
   #modal:target {
     display: none;
   }
 `;
+export const Form = styled.form`
+  width: auto;
+  background-color: var(--blue_light);
+  padding: 1rem;
+  margin: 2rem;
+  border-radius: 20px;
+  display: block;
+  label {
+    display: block;
+    padding: 0.5rem;
+    color: var(--white);
+  }
+  label.sex {
+    display: inline;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="address"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"] {
+    width: 90%;
+    margin: 0rem 1rem 1rem 1rem;
+    height: 2rem;
+    border-radius: 10px;
+    border: none;
+    padding: 0 1rem;
+    :focus-visible {
+      outline: none;
+      border: 1px solid var(--green);
+    }
+  }
+
+  input[type="submit"] {
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: 2rem;
+    color: var(--white);
+    background-color: var(--blue_dark);
+    align-self: center;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+`;
 
 export const Title = styled.div`
-  background: var(--blue_dark);
+  background: var(--white);
   width: fit-content;
-  margin: 1rem 0 1.5rem 0;
-  border-radius: 10%;
+  margin: 0 0 2rem 0;
+  border-radius: 20px;
   overflow: hidden;
   h2 {
     font-size: var(--font_medium);
-    color: var(--white);
+    color: var(--red);
     padding: 0.5rem;
     margin: 0rem;
   }
@@ -149,12 +194,15 @@ export const Menu = styled.nav`
 `;
 
 export const List = styled.div`
-  height: 30rem;
+  padding: 1rem;
+  background-color: var(--gray);
+  box-shadow: 0 0 5px 10px rgba(0, 0, 0, 0.3);
   overflow: auto;
+  height: 30rem;
 `;
 
 export const Table = styled.table`
-  border-collapse: separate;
+  border-collapse: collapse;
   border: solid var(--red) 1px;
   tr {
     padding: 4rem;
@@ -167,7 +215,7 @@ export const Table = styled.table`
     th,
     td {
       width: auto;
-      border: solid var(--red) 1px;
+      border: none;
       color: var(--green);
       padding: 1rem;
       text-align: left;
@@ -181,45 +229,35 @@ export const Table = styled.table`
       color: var(--white);
       font-weight: 700;
     }
+    input {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin: 0;
+    }
   }
 `;
 
-export const Form = styled.form`
+export const SearchAndAdd = styled.div`
   width: 100%;
-  background-color: var(--blue_light);
-  padding: 1rem;
-  margin: 2rem;
-  border-radius: 20px;
-  display: block;
-  label {
-    display: block;
+  background-color: var(--gray);
+  padding: 0.5rem 0 2rem 0;
+  font-weight: 900;
+  input {
+    width: 100%;
+    height: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--red);
     padding: 0.5rem;
-    color: var(--white);
+    margin: 1rem 0rem;
   }
-  input[type="text"],
-  input[type="email"],
-  input[type="address"],
-  input[type="tel"],
-  input[type="password"] {
-    margin: 0rem 1rem 1rem 1rem;
+  button {
+    width: 10rem;
     height: 2rem;
+    border: 1px solid var(--red);
+    margin: 0.5rem 1rem 0.5rem 0rem;
     border-radius: 10px;
-    border: none;
-    padding: 0 1rem;
-    :focus-visible {
-      outline: none;
-      border: 1px solid var(--green);
-    }
-  }
-
-  input[type="button"] {
-    margin: 1rem;
-    width: 50%;
-    height: 2rem;
-    color: var(--white);
     background-color: var(--blue_dark);
-    align-self: center;
-    border-radius: 10px;
+    color: var(--white);
     cursor: pointer;
   }
 `;

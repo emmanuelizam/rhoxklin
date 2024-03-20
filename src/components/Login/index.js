@@ -11,7 +11,7 @@ const Login = () => {
   const [loginDetails, setLoginDetails] = useState({});
   const [error, setError] = useState(false);
 
-  const [state, setstate, cartNumber, setCartNumber] = useContext(Context);
+  const [state, setstate, localCart, setLocalCart] = useContext(Context);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -27,7 +27,7 @@ const Login = () => {
         const data = await res.json();
         sessionStorage.setItem("token", data.token);
         sessionStorage.setItem("id", data.user.id);
-        setstate(data.user);
+        setstate(data);
         navigate("/rhoxklin/myaccount");
       } else {
         return <h1>Something went wrong</h1>;

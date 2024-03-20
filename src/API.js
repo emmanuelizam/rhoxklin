@@ -36,20 +36,16 @@ const fetchStaffs = (token) => {
   });
 };
 
-const postMessage = (message) => {
-  return fetch("http://localhost:5000/api/staffcustomermessage", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(message),
-  });
-};
-
-const fetchCleaningMachines = () => {
+const fetchCleaningProducts = () => {
   return fetch(`http://localhost:5000/api/product`, {
     method: "GET",
   });
 };
-
+const fetchCartItems = () => {
+  return fetch(`http://localhost:5000/api/cartItem`, {
+    method: "GET",
+  });
+};
 const addCleaningMachineToCart = (id) => {
   const item = {};
   item.CustomerId = 1;
@@ -63,16 +59,104 @@ const addCleaningMachineToCart = (id) => {
   });
 };
 
-const removeCleaningMachineFromCart = (id) => {
-  return fetch(`http://localhost:5000/api/cartItem/${id}`, {
-    method: "DELETE",
+const postMessage = (message) => {
+  return fetch("http://localhost:5000/api/staffcustomermessage", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(message),
   });
 };
 
-const fetchCartItems = () => {
-  return fetch(`http://localhost:5000/api/cartItem`, {
-    method: "GET",
+const postStaff = (token, staff) => {
+  return fetch("http://localhost:5000/protected-api/staff", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(staff),
   });
+};
+
+const postCustomer = (token, customer) => {
+  return fetch("http://localhost:5000/protected-api/customer", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(customer),
+  });
+};
+
+const postProduct = (token, product) => {
+  return fetch("http://localhost:5000/protected-api/product", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(product),
+  });
+};
+
+const postService = (token, service) => {
+  return fetch("http://localhost:5000/protected-api/service", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(service),
+  });
+};
+
+const removeCleaningMachineFromCart = (token, id) => {
+  return fetch(`http://localhost:5000/api/cartItem/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+const deleteCurrentUserDetails = (token, id) => {
+  return fetch(`http://localhost:5000/protected-api/staff/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+const deleteStaffs = (token, id) => {
+  return fetch(`http://localhost:5000/protected-api/staff/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+const deleteCustomers = (token, id) => {
+  return fetch(`http://localhost:5000/protected-api/staff/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+const deleteCleaningProducts = (token, id) => {
+  return fetch(`http://localhost:5000/protected-api/staff/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+const deleteMessages = async (options) => {
+  const token = options.token;
+  const selectedItems = options.selectedItems;
+  for (var i = 0; i < selectedItems.length; i++) {
+    await fetch(
+      `http://localhost:5000/protected-api/staffcustomermessage/${selectedItems[i]}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+  }
 };
 
 const API = {
@@ -80,12 +164,21 @@ const API = {
   fetchCurrentUserDetails,
   fetchMessages,
   fetchCustomers,
-  postMessage,
-  fetchCleaningMachines,
-  addCleaningMachineToCart,
-  removeCleaningMachineFromCart,
+  fetchCleaningProducts,
   fetchCartItems,
   fetchStaffs,
+  addCleaningMachineToCart,
+  postMessage,
+  postStaff,
+  postCustomer,
+  postProduct,
+  postService,
+  removeCleaningMachineFromCart,
+  deleteCurrentUserDetails,
+  deleteStaffs,
+  deleteCustomers,
+  deleteCleaningProducts,
+  deleteMessages,
 };
 
 export default API;

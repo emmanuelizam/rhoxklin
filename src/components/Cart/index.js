@@ -44,7 +44,10 @@ const Cart = ({ setDisplay, setMessageTitle, Loader }) => {
       setLocalCart([...cart]);
     } else {
       try {
-        const resp = await API.removeCleaningMachineFromCart(cart_id);
+        const resp = await API.removeCleaningMachineFromCart(
+          state.token,
+          cart_id
+        );
         if (resp.ok) {
           resp
             .json()
