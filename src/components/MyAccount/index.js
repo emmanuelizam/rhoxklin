@@ -16,6 +16,406 @@ import {
 import API from "../../API";
 import { Context } from "../../context";
 import bin from "../../images/icon-trash.svg";
+import Loader from "../Loader";
+
+const modelConstraint = {
+  birthday: "date",
+  email: "email",
+  password: "password",
+  name: "text",
+  role: "text",
+  sex: "radio",
+  description: "text",
+  price: "number",
+  phoneNumber: "tel",
+  content: "text",
+  picture: "file",
+  id: "number",
+  createdAt: "datetime-local",
+  updatedAt: "datetime-local",
+};
+const displayModels = {
+  Staffs: {
+    id: 0,
+    name: null,
+    birthday: null,
+    sex: null,
+    role: null,
+    phoneNumber: null,
+    email: null,
+    password: null,
+    createdAt: null,
+    updatedAt: null,
+  },
+  Customers: {
+    id: 0,
+    name: null,
+    birthday: null,
+    sex: null,
+    phoneNumber: null,
+    email: null,
+    password: null,
+    createdAt: null,
+    updatedAt: null,
+  },
+  Products: {
+    id: 0,
+    name: null,
+    description: null,
+    price: null,
+    createdAt: null,
+    updatedAt: null,
+  },
+  Services: {
+    id: 0,
+    name: null,
+    description: null,
+    price: null,
+    createdAt: null,
+    updatedAt: null,
+  },
+  Messages: {
+    id: 0,
+    content: null,
+    StaffId: null,
+    CustomerId: null,
+    senderIsCustomer: null,
+    dateSend: null,
+    createdAt: null,
+    updatedAt: null,
+  },
+  Testimonials: {
+    id: 0,
+    name: null,
+    content: null,
+    picture: null,
+    createdAt: null,
+    updatedAt: null,
+  },
+};
+
+const convertImageToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    if (file.type === "image/png" || file.type === "image/jpeg") {
+      const fileReader = new FileReader();
+      fileReader.onload = (event) => {
+        return resolve(event.target.result);
+      };
+      fileReader.onerror = (error) => {
+        console.log(error);
+        return reject(error);
+      };
+      fileReader.readAsDataURL(file);
+    } else {
+      return reject(new Error("file must be png or jpg"));
+    }
+  });
+};
+
+const Error = () => {
+  return (
+    <div>
+      <h1>An error has Occured</h1>
+    </div>
+  );
+};
+
+const EditFormComponent = ({
+  state,
+  tableData,
+  setTableData,
+  recordAdded,
+  setRecordAdded,
+  editForm,
+  setEditForm,
+  selectedItem,
+}) => {
+  const handlePutSubmit = async (event) => {
+    event.preventDefault();
+    const token = state.token;
+    try {
+      var res = null;
+
+      // cleaning data
+      delete editForm.createdAt;
+      delete editForm.updatedAt;
+      if (selectedItem === "Staffs") {
+        res = await API.putStaff(token, editForm);
+      } else if (selectedItem === "Customers") {
+        res = await API.putCustomer(token, editForm);
+      } else if (selectedItem === "Products") {
+        res = await API.putProduct(token, editForm);
+      } else if (selectedItem === "Services") {
+        res = await API.putService(token, editForm);
+      } else if (selectedItem === "Testimonials") {
+        res = await API.putTestimonial(token, editForm);
+      }
+      if (res.ok) {
+        const data = await res.json();
+        if (selectedItem === "Testimonials") {
+          data.picture = data.picture;
+        }
+        // we now update our table by relacing any item on the table whose id
+        // is same with our response data
+        // note: use spread to ensure that a new object is created
+        // otherwise return the item
+        setTableData(
+          tableData.map((item) => (item.id === data.id ? { ...data } : item))
+        );
+        setRecordAdded(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (recordAdded) {
+    return (
+      <Title>
+        <h2>{selectedItem} record was edited successfully!</h2>
+      </Title>
+    );
+  } else {
+    return (
+      <Form method="POST" onSubmit={handlePutSubmit}>
+        {Object.keys(editForm).length > 0 ? (
+          Object.keys(editForm).map((key) => (
+            <>
+              <label for={key}>{key}:</label>
+              {modelConstraint[`${key}`] === "radio" ? (
+                <>
+                  <input
+                    type={modelConstraint[`${key}`]}
+                    name={"sex"}
+                    id="male"
+                    value={"Male"}
+                    checked={
+                      // if it's a male check this
+                      editForm[`${key}`] === "Male" ? true : false
+                    }
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setEditForm({
+                          ...editForm,
+                          [event.target.name]: event.target.value,
+                        });
+                      }
+                    }}
+                  ></input>
+                  <label for="male" className="sex">
+                    {"Male"}
+                  </label>
+                  <input
+                    type={modelConstraint[`${key}`]}
+                    name={"sex"}
+                    id="female"
+                    value={"Female"}
+                    checked={
+                      // if it's a female, check this
+                      editForm[`${key}`] === "Female" ? true : false
+                    }
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setEditForm({
+                          ...editForm,
+                          [event.target.name]: event.target.value,
+                        });
+                      }
+                    }}
+                  ></input>
+                  <label for="female" className="sex">
+                    {"Female"}
+                  </label>
+                </>
+              ) : (
+                <input
+                  type={modelConstraint[`${key}`]}
+                  name={key}
+                  id={key}
+                  key={`input-${selectedItem}-${key}`}
+                  disabled={
+                    key === "id" || key === "createdAt" || key === "updatedAt"
+                      ? true
+                      : false
+                  }
+                  step={key === "price" ? ".01" : ""}
+                  pattern={
+                    key === "password"
+                      ? `^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[A-Za-z0123456789/?!;'":,.<>][}{!@#$%^&*()-=_+\`~\\]{8,}$`
+                      : null
+                  }
+                  placeholder={
+                    key === "password"
+                      ? "must contain an upper and lower case letter and a number and a symbol"
+                      : null
+                  }
+                  onChange={(event) => {
+                    setEditForm({
+                      ...editForm,
+                      [event.target.name]: event.target.value,
+                    });
+                  }}
+                  value={editForm[`${key}`]}
+                ></input>
+              )}
+            </>
+          ))
+        ) : (
+          <h1>You cannot edit this record</h1>
+        )}
+        <input type="submit" name="save" value="Save"></input>
+      </Form>
+    );
+  }
+};
+
+const AddFormComponent = ({
+  state,
+  tableData,
+  setTableData,
+  recordAdded,
+  setRecordAdded,
+  addForm,
+  setAddForm,
+  selectedItem,
+}) => {
+  const handlePostSubmit = async (event) => {
+    event.preventDefault();
+    const token = state.token;
+    try {
+      var res = null;
+      if (selectedItem === "Staffs") {
+        res = await API.postStaff(token, addForm);
+      } else if (selectedItem === "Customers") {
+        res = await API.postCustomer(token, addForm);
+      } else if (selectedItem === "Products") {
+        res = await API.postProduct(token, addForm);
+      } else if (selectedItem === "Services") {
+        res = await API.postService(token, addForm);
+      } else if (selectedItem === "Testimonials") {
+        res = await API.postTestimonial(token, addForm);
+      }
+      if (res.ok) {
+        const data = await res.json();
+        // we now want to add our new data to tableData
+        setTableData([...tableData, { ...data }]);
+        setRecordAdded(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (recordAdded) {
+    return (
+      <Title>
+        <h2>{selectedItem} record was added successfully!</h2>
+      </Title>
+    );
+  } else {
+    return (
+      <Form method="POST" onSubmit={handlePostSubmit}>
+        {displayModels[`${selectedItem}`] ? (
+          Object.keys(displayModels[`${selectedItem}`]).map((key) => (
+            <>
+              <label for={key}>{key}:</label>
+              {modelConstraint[`${key}`] === "radio" ? (
+                <>
+                  <input
+                    type={modelConstraint[`${key}`]}
+                    name={"sex"}
+                    key={"male"}
+                    id="male"
+                    value={"Male"}
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setAddForm({
+                          ...addForm,
+                          [event.target.name]: event.target.value,
+                        });
+                      }
+                    }}
+                  ></input>
+                  <label for="male" className="sex">
+                    {"Male"}
+                  </label>
+                  <input
+                    type={modelConstraint[`${key}`]}
+                    name={"sex"}
+                    key={"female"}
+                    id="female"
+                    value={"Female"}
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setAddForm({
+                          ...addForm,
+                          [event.target.name]: event.target.value,
+                        });
+                      }
+                    }}
+                  ></input>
+                  <label for="female" className="sex">
+                    {"Female"}
+                  </label>
+                </>
+              ) : (
+                <>
+                  <input
+                    type={modelConstraint[`${key}`]}
+                    name={key}
+                    step={key === "price" ? ".01" : ""}
+                    disabled={
+                      key === "id" || key === "createdAt" || key === "updatedAt"
+                        ? true
+                        : false
+                    }
+                    pattern={
+                      key === "password"
+                        ? /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[A-Za-z\d/?!;'":,.<>\]\[}{!@#$%^&*()-=_+`~\\]{8,}$/
+                        : null
+                    }
+                    placeholder={
+                      key === "password"
+                        ? "must contain an upper and lower case letter and a number and a symbol"
+                        : null
+                    }
+                    accept={key === "picture" ? ".png,.jpg" : null}
+                    onChange={async (event) => {
+                      // if we have a picture, we must convert it to base64 first
+                      if (event.target.name === "picture") {
+                        var result = await convertImageToBase64(
+                          event.target.files[0]
+                        );
+                        setAddForm({
+                          ...addForm,
+                          [event.target.name]: result,
+                        });
+                      } else {
+                        setAddForm({
+                          ...addForm,
+                          [event.target.name]: event.target.value,
+                        });
+                      }
+                    }}
+                    value={key !== "picture" ? addForm[`${key}`] : ""}
+                  ></input>
+                  {key === "picture" ? (
+                    <img alt="not selected yet" src={addForm[`${key}`]}></img>
+                  ) : (
+                    <br />
+                  )}
+                </>
+              )}
+            </>
+          ))
+        ) : (
+          <h1>You cannot add to this data</h1>
+        )}
+        <input type="submit" name="save" value="Save"></input>
+      </Form>
+    );
+  }
+};
 
 const MyAccount = () => {
   const navigate = useNavigate();
@@ -24,57 +424,16 @@ const MyAccount = () => {
   const [selectedItem, setSelectedItem] = useState("Staffs");
   const [selectedItems, setSelectedItems] = useState([]);
   const [recordAdded, setRecordAdded] = useState(false);
-  const modelConstraint = {
-    birthday: "Date",
-    email: "email",
-    password: "password",
-    name: "text",
-    role: "text",
-    sex: "radio",
-    description: "text",
-    price: "number",
-    phoneNumber: "tel",
-  };
-  const [models, setModels] = useState({
-    Staffs: {
-      name: null,
-      birthday: null,
-      sex: null,
-      role: null,
-      phoneNumber: null,
-      email: null,
-      password: null,
-    },
-    Customers: {
-      name: null,
-      birthday: null,
-      sex: null,
-      phoneNumber: null,
-      email: null,
-      password: null,
-    },
-    Products: {
-      name: null,
-      description: null,
-      price: null,
-    },
-    Services: {
-      name: null,
-      description: null,
-      price: null,
-    },
-    Messages: {
-      content: "",
-      StaffId: "",
-      CustomerId: "",
-      senderIsCustomer: null,
-      dateSend: "",
-    },
-  });
-  const [error, setError] = useState(null);
+  const [editForm, setEditForm] = useState({});
+  const [addForm, setAddForm] = useState({});
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
+      setError(false);
       try {
         const token = state ? state.token : null;
         const id = state ? state.user.id : null;
@@ -83,25 +442,38 @@ const MyAccount = () => {
           if (selectedItem === "Account Details") {
             res = await API.fetchStaff(token, id);
           } else if (selectedItem === "Messages") {
-            res = await API.fetchMessages(token);
+            res = await API.fetchMessages(token, query);
           } else if (selectedItem === "Customers") {
-            res = await API.fetchCustomers(token);
+            res = await API.fetchCustomers(token, query);
           } else if (selectedItem === "Staffs") {
-            res = await API.fetchStaffs(token);
+            res = await API.fetchStaffs(token, query);
           } else if (selectedItem === "Products") {
-            res = await API.fetchCleaningProducts(token);
+            // this does not require any authentication
+            res = await API.fetchProducts(query);
+          } else if (selectedItem === "Testimonials") {
+            // this does not require any authentication
+            res = await API.fetchTestimonials(query);
           }
           // AccountDetails comes like this {} while other come like this []
           // the code below tries to make AccountDetails compatible with others
           if (res.ok) {
             var data = await res.json();
+            setLoading(false);
+            // if it's not "Account Details" and the there is more than one entry in the data
+            // setTableData as data
+            // otherwise if there is nothing in data, return a displayModel
             if (selectedItem !== "Account Details") {
               setTableData(
-                data.length > 0 ? data : [models[`${selectedItem}`]]
+                data.length > 0 ? data : [displayModels[`${selectedItem}`]]
               );
             } else {
+              // otherwise check there are keys in data
+              // if yes: return data as an elt of an array
+              // if no: return the displayModel
               setTableData(
-                Object.keys(data).length > 0 ? [data] : [models[`Staffs`]]
+                Object.keys(data).length > 0
+                  ? [data]
+                  : [displayModels[`Staffs`]]
               );
             }
           } else {
@@ -115,55 +487,7 @@ const MyAccount = () => {
       }
     };
     fetchData();
-  }, [selectedItem]);
-
-  const handlePostSubmit = async (event) => {
-    event.preventDefault();
-    const token = state.token;
-    try {
-      var res = null;
-      if (selectedItem === "Staffs") {
-        res = await API.postStaff(token, models.Staffs);
-      } else if (selectedItem === "Customers") {
-        res = await API.postCustomer(token, models.Customers);
-      } else if (selectedItem === "Products") {
-        res = await API.postProduct(token, models.Products);
-      } else if (selectedItem === "Service") {
-        res = await API.postService(token, models.Services);
-      }
-      if (res.ok) {
-        const data = await res.json();
-        setTableData([...tableData, { ...models[`${selectedItem}`], ...data }]);
-        setRecordAdded(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handlePutSubmit = async (event) => {
-    event.preventDefault();
-    const token = state.token;
-    try {
-      var res = null;
-      if (selectedItem === "Staffs") {
-        res = await API.putStaff(token, models.Staffs);
-      } else if (selectedItem === "Customers") {
-        res = await API.putCustomer(token, models.Customers);
-      } else if (selectedItem === "Products") {
-        res = await API.putProduct(token, models.Products);
-      } else if (selectedItem === "Service") {
-        res = await API.putService(token, models.Services);
-      }
-      if (res.ok) {
-        const data = await res.json();
-        setTableData([...tableData, { ...models[`${selectedItem}`], ...data }]);
-        setRecordAdded(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  }, [selectedItem, query]);
 
   const handleDelete = async (event, id) => {
     try {
@@ -171,16 +495,25 @@ const MyAccount = () => {
       //const id = event.target.id;
       const deleteItems = async () => {
         if (token) {
+          // prevent staff from deleting his own records, records of customer with id=1 and staff with id=1
           if (selectedItem === "Account Details") {
-            return await API.deleteCurrentUserDetails(token, id);
+            return id !== 1 && id !== state.user.id
+              ? await API.deleteCurrentUserDetails(token, id)
+              : { ok: false };
           } else if (selectedItem === "Messages") {
             return await API.deleteMessages(token, id);
           } else if (selectedItem === "Customers") {
-            return await API.deleteCustomers(token, id);
+            return id !== 1
+              ? await API.deleteCustomers(token, id)
+              : { ok: false };
           } else if (selectedItem === "Staffs") {
-            return await API.deleteStaffs(token, id);
+            return id !== 1 && id !== state.user.id
+              ? await API.deleteStaffs(token, id)
+              : { ok: false };
           } else if (selectedItem === "Products") {
             return await API.deleteCleaningProducts(token, id);
+          } else if (selectedItem === "Testimonials") {
+            return await API.deleteTestimonials(token, id);
           }
         }
       };
@@ -234,30 +567,45 @@ const MyAccount = () => {
           >
             <span>Messages </span>
           </button>
+          <button
+            onClick={() => {
+              setSelectedItem("Testimonials");
+            }}
+          >
+            <span>Testimonials </span>
+          </button>
         </Menu>
-        {tableData.length > 0 ? (
-          <>
-            <Title>
-              <h2>{selectedItem}</h2>
-            </Title>
-            <List>
-              <SearchAndAdd>
-                <button
-                  onClick={(event) => {
-                    if (
-                      event.target.className !== ("checkbox" || "checkboxCell")
-                    ) {
-                      setRecordAdded(false);
-                      var elt = document.querySelector("#add");
-                      elt.style.display = "block";
-                    }
-                  }}
-                >
-                  Add New Record
-                </button>
-                <input type="text" name="search" placeholder="search"></input>
-              </SearchAndAdd>
-              <div>
+        <>
+          <Title>
+            <h2>{selectedItem}</h2>
+          </Title>
+          <SearchAndAdd>
+            <button
+              onClick={(event) => {
+                // ensure that addForm is cleared because it will be used in storing form data
+                setAddForm({});
+                if (event.target.className !== ("checkbox" || "checkboxCell")) {
+                  setRecordAdded(false);
+                  var elt = document.querySelector("#add");
+                  elt.style.display = "block";
+                }
+              }}
+            >
+              Add New Record
+            </button>
+            <input
+              type="text"
+              name="search"
+              placeholder="search"
+              onChange={(event) => {
+                setQuery(event.target.value);
+              }}
+              value={query}
+            ></input>
+          </SearchAndAdd>
+          <List>
+            <div>
+              {!loading ? (
                 <Table>
                   <tr>
                     <th>
@@ -281,74 +629,100 @@ const MyAccount = () => {
                     <th className="delete">
                       <img src={bin} alt="delete" className="delete"></img>
                     </th>
-                    {Object.keys(tableData[0]) ? (
-                      Object.keys(tableData[0]).map((key) => <th>{key}</th>)
-                    ) : (
-                      <th>No data</th>
-                    )}
+                    {Object.keys(
+                      displayModels[
+                        `${
+                          selectedItem === "Account Details"
+                            ? "Staffs"
+                            : selectedItem
+                        }`
+                      ]
+                    ).map((key) => (
+                      <th>{key}</th>
+                    ))}
                   </tr>
-                  {tableData.map((entry) => (
-                    <tr
-                      key={entry.id}
-                      id={entry.id}
-                      onClick={(event) => {
-                        if (
-                          event.target.className !== "checkbox" &&
-                          event.target.className !== "checkboxCell" &&
-                          event.target.className !== "delete"
-                        ) {
-                          setModels((prev) => {
-                            prev[`${selectedItem}`] = entry;
-                            return prev;
-                          });
-                          setRecordAdded(false);
-                          var elt = document.querySelector("#edit");
-                          elt.style.display = "block";
-                        }
-                      }}
-                    >
-                      <td className="checkboxCell">
-                        <input
-                          className="checkbox"
-                          type="checkbox"
-                          onClick={(event) => {
-                            if (event.target.checked === true) {
-                              setSelectedItems([
-                                ...selectedItems,
-                                event.target.parentNode.parentNode.id,
-                              ]);
-                            }
-                          }}
-                        ></input>
-                      </td>
-                      <td
-                        className="delete"
+                  {!error ? (
+                    tableData.map((entry) => (
+                      <tr
+                        key={`${selectedItem}-${entry.id}`}
+                        id={`${selectedItem}-${entry.id}`}
                         onClick={(event) => {
-                          var id = entry.id;
-                          handleDelete(event, id);
+                          // ensure that editForm is cleared before anything is added to it
+                          setEditForm({});
+                          if (
+                            event.target.className !== "checkbox" &&
+                            event.target.className !== "checkboxCell" &&
+                            event.target.className !== "delete"
+                          ) {
+                            // birthday comes with a time element that is not displayed on date
+                            // we therefore remove the time element
+                            if (entry.birthday) {
+                              entry.birthday = entry.birthday.split("T")[0];
+                            }
+                            setEditForm(entry);
+                            setRecordAdded(false);
+                            var elt = document.querySelector("#edit");
+                            elt.style.display = "block";
+                          }
                         }}
                       >
-                        <img
+                        <td className="checkboxCell">
+                          <input
+                            className="checkbox"
+                            type="checkbox"
+                            onClick={(event) => {
+                              if (event.target.checked === true) {
+                                setSelectedItems([
+                                  ...selectedItems,
+                                  event.target.parentNode.parentNode.id,
+                                ]);
+                              }
+                            }}
+                          ></input>
+                        </td>
+                        <td
                           className="delete"
-                          src={bin}
-                          alt="delete"
-                          id={entry.id}
-                        ></img>
-                      </td>
-                      {Object.keys(entry) ? (
-                        Object.keys(entry).map((key) => <td>{entry[key]}</td>)
-                      ) : (
-                        <td>No data</td>
-                      )}
-                    </tr>
-                  ))}
+                          onClick={(event) => {
+                            var id = entry.id;
+                            handleDelete(event, id);
+                          }}
+                        >
+                          <img
+                            className="delete"
+                            src={bin}
+                            alt="delete"
+                            id={entry.id}
+                          ></img>
+                        </td>
+                        {Object.keys(entry) ? (
+                          Object.keys(entry).map((key) =>
+                            key !== "password" ? (
+                              <td>
+                                {key !== "picture" ? (
+                                  entry[key]
+                                ) : (
+                                  <img src={`${entry[key]}`} alt="person"></img>
+                                )}
+                              </td>
+                            ) : (
+                              <td>***</td>
+                            )
+                          )
+                        ) : (
+                          <td></td>
+                        )}
+                      </tr>
+                    ))
+                  ) : (
+                    <Error />
+                  )}
                 </Table>
-              </div>
-            </List>
-          </>
-        ) : (
-          <Table></Table>
-        )}
+              ) : (
+                <Loader></Loader>
+              )}
+            </div>
+          </List>
+        </>
       </Content>
       <Modal id="edit">
         <button
@@ -359,95 +733,16 @@ const MyAccount = () => {
         >
           X
         </button>
-        {recordAdded ? (
-          <Title>
-            <h2>{selectedItem} record was edited successfully!</h2>
-          </Title>
-        ) : (
-          <Form method="POST" onSubmit={handlePutSubmit}>
-            {models[`${selectedItem}`] ? (
-              Object.keys(models[`${selectedItem}`]).map((key, index) => (
-                <>
-                  <label for={key}>{key}:</label>
-                  {modelConstraint[`${key}`] === "radio" ? (
-                    <>
-                      <input
-                        type={modelConstraint[`${key}`]}
-                        name={"sex"}
-                        id="male"
-                        value={"Male"}
-                        checked={
-                          models[`${selectedItem}`][`${key}`] === "Male"
-                            ? true
-                            : false
-                        }
-                        onChange={(event) => {
-                          if (event.target.checked) {
-                            setModels(() => {
-                              var model = models[`${selectedItem}`];
-                              model[`${key}`] = event.target.value;
-                              var modelsCopy = { ...models };
-                              modelsCopy[`${selectedItem}`] = model;
-                              return modelsCopy;
-                            });
-                          }
-                        }}
-                      ></input>
-                      <label for="male" className="sex">
-                        {"Male"}
-                      </label>
-                      <input
-                        type={modelConstraint[`${key}`]}
-                        name={"sex"}
-                        id="female"
-                        value={"Female"}
-                        checked={
-                          models[`${selectedItem}`][`${key}`] === "Female"
-                            ? true
-                            : false
-                        }
-                        onChange={(event) => {
-                          if (event.target.checked) {
-                            setModels(() => {
-                              var model = models[`${selectedItem}`];
-                              model[`${key}`] = event.target.value;
-                              var modelsCopy = { ...models };
-                              modelsCopy[`${selectedItem}`] = model;
-                              return modelsCopy;
-                            });
-                          }
-                        }}
-                      ></input>
-                      <label for="female" className="sex">
-                        {"Female"}
-                      </label>
-                    </>
-                  ) : (
-                    <input
-                      type={modelConstraint[`${key}`]}
-                      name={key}
-                      id={key}
-                      step=".01"
-                      onChange={(event) => {
-                        setModels(() => {
-                          var model = models[`${selectedItem}`];
-                          model[`${key}`] = event.target.value;
-                          var modelsCopy = { ...models };
-                          modelsCopy[`${selectedItem}`] = model;
-                          return modelsCopy;
-                        });
-                      }}
-                      value={models[`${selectedItem}`].key}
-                    ></input>
-                  )}
-                </>
-              ))
-            ) : (
-              <h1>You cannot edit this record</h1>
-            )}
-            <input type="submit" name="save" value="Save"></input>
-          </Form>
-        )}
+        <EditFormComponent
+          state={state}
+          tableData={tableData}
+          setTableData={setTableData}
+          recordAdded={recordAdded}
+          setRecordAdded={setRecordAdded}
+          editForm={editForm}
+          setEditForm={setEditForm}
+          selectedItem={selectedItem}
+        ></EditFormComponent>
       </Modal>
       <Modal id="add">
         <button
@@ -458,84 +753,16 @@ const MyAccount = () => {
         >
           X
         </button>
-        {recordAdded ? (
-          <h1>{selectedItem} record was added successfully!</h1>
-        ) : (
-          <Form method="POST" onSubmit={handlePostSubmit}>
-            {models[`${selectedItem}`] ? (
-              Object.keys(models[`${selectedItem}`]).map((key) => (
-                <>
-                  <label for={key}>{key}:</label>
-                  {modelConstraint[`${key}`] === "radio" ? (
-                    <>
-                      <input
-                        type={modelConstraint[`${key}`]}
-                        name={"sex"}
-                        key={"male"}
-                        id="male"
-                        value={"Male"}
-                        onChange={(event) => {
-                          if (event.target.checked) {
-                            setModels(() => {
-                              var model = models[`${selectedItem}`];
-                              model[`${key}`] = event.target.value;
-                              var modelsCopy = { ...models };
-                              modelsCopy[`${selectedItem}`] = model;
-                              return modelsCopy;
-                            });
-                          }
-                        }}
-                      ></input>
-                      <label for="male" className="sex">
-                        {"Male"}
-                      </label>
-                      <input
-                        type={modelConstraint[`${key}`]}
-                        name={"sex"}
-                        key={"female"}
-                        id="female"
-                        value={"Female"}
-                        onChange={(event) => {
-                          if (event.target.checked) {
-                            setModels(() => {
-                              var model = models[`${selectedItem}`];
-                              model[`${key}`] = event.target.value;
-                              var modelsCopy = { ...models };
-                              modelsCopy[`${selectedItem}`] = model;
-                              return modelsCopy;
-                            });
-                          }
-                        }}
-                      ></input>
-                      <label for="female" className="sex">
-                        {"Female"}
-                      </label>
-                    </>
-                  ) : (
-                    <input
-                      type={modelConstraint[`${key}`]}
-                      name={key}
-                      step=".01"
-                      onChange={(event) => {
-                        setModels(() => {
-                          var model = models[`${selectedItem}`];
-                          model[`${key}`] = event.target.value;
-                          var modelsCopy = { ...models };
-                          modelsCopy[`${selectedItem}`] = model;
-                          return modelsCopy;
-                        });
-                      }}
-                      value={models[`${selectedItem}`].key}
-                    ></input>
-                  )}
-                </>
-              ))
-            ) : (
-              <h1>You cannot add to this data</h1>
-            )}
-            <input type="submit" name="save" value="Save"></input>
-          </Form>
-        )}
+        <AddFormComponent
+          state={state}
+          tableData={tableData}
+          setTableData={setTableData}
+          recordAdded={recordAdded}
+          setRecordAdded={setRecordAdded}
+          addForm={addForm}
+          setAddForm={setAddForm}
+          selectedItem={selectedItem}
+        ></AddFormComponent>
       </Modal>
     </Wrapper>
   );

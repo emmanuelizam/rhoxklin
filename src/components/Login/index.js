@@ -87,7 +87,7 @@ const Login = () => {
           <br />
 
           <input type="submit" name="login" id="login" value="Login"></input>
-          <a href="/rhoxklin/createaccount">"Don't have an account?"</a>
+          <a href="/rhoxklin/contactus">"Don't have an account?"</a>
         </form>
       </Content>
       <ContactUsButton href="./contactus">

@@ -10,6 +10,8 @@ import {
   Dot,
 } from "./Testimonial.styles";
 
+import API from "../../API";
+
 function useInterval(callback, delay) {
   const savedCallback = useRef();
 
@@ -38,7 +40,7 @@ export const Testimonial = () => {
   useEffect(() => {
     const getTestimonials = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/testimonial");
+        const res = await API.fetchTestimonials("");
         if (res.ok) {
           const data = await res.json();
           data.map((d) => (d.display = "none"));

@@ -41,7 +41,7 @@ const Header = () => {
           <Home href="/rhoxklin/">
             <h3>Home</h3>
           </Home>
-          <Services href="#services">
+          <Services href="/rhoxklin/#services">
             <h3>Services</h3>
           </Services>
           <ContactUsHeader href="/rhoxklin/contactus">

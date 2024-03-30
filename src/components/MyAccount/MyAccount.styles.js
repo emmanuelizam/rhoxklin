@@ -63,7 +63,9 @@ export const Form = styled.form`
   input[type="address"],
   input[type="tel"],
   input[type="password"],
-  input[type="number"] {
+  input[type="number"],
+  input[type="datetime-local"],
+  input[type="date"] {
     width: 90%;
     margin: 0rem 1rem 1rem 1rem;
     height: 2rem;
@@ -86,6 +88,16 @@ export const Form = styled.form`
     align-self: center;
     border-radius: 10px;
     cursor: pointer;
+  }
+  img {
+    height: 4rem;
+    width: 4rem;
+    display: inline-block;
+    transition: all 500ms linear;
+    :hover {
+      height: 10rem;
+      width: 10rem;
+    }
   }
 `;
 
@@ -131,15 +143,16 @@ export const Content = styled.div`
 
 export const Menu = styled.nav`
   width: 20%;
-  height: 35rem;
+  height: 55rem;
   background-color: var(--blue_dark);
   padding: 0;
   margin: 0 4rem 0 0;
   border: solid var(--green);
   display: block;
   float: left;
+
   button {
-    font-size: var(--font_small);
+    font-size: var(--font_very_small);
     color: var(--white);
     background-color: transparent;
     width: 100%;
@@ -176,13 +189,10 @@ export const Menu = styled.nav`
       color: white;
     }
 
-    @media screen and (max-width: 900px) {
-      font-size: var(--font_very_small);
-    }
-
     span {
       margin: auto;
-      padding: 1rem;
+      padding: 1rem 0;
+      word-wrap: break-word;
     }
 
     span:after {
@@ -198,7 +208,8 @@ export const List = styled.div`
   background-color: var(--gray);
   box-shadow: 0 0 5px 10px rgba(0, 0, 0, 0.3);
   overflow: auto;
-  height: 30rem;
+  height: 45rem;
+  position: static;
 `;
 
 export const Table = styled.table`
@@ -228,22 +239,30 @@ export const Table = styled.table`
       background-color: var(--blue_dark);
       color: var(--white);
       font-weight: 700;
+      position: sticky;
+      top: 0px;
     }
     input {
       width: 1.5rem;
       height: 1.5rem;
       margin: 0;
     }
+    img {
+      height: 64px;
+      height: 64px;
+    }
   }
 `;
 
 export const SearchAndAdd = styled.div`
-  width: 100%;
   background-color: var(--gray);
-  padding: 0.5rem 0 2rem 0;
+  padding: 1rem;
+  margin: 2rem;
   font-weight: 900;
+  overflow: hidden;
+  position: static;
+
   input {
-    width: 100%;
     height: 2rem;
     border-radius: 10px;
     border: 1px solid var(--red);
