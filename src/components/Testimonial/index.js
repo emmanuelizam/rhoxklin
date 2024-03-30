@@ -129,10 +129,7 @@ export const Testimonial = () => {
               display={testimonial.display}
               id={testimonial.id}
             >
-              <img
-                src={"data:image/png;base64," + testimonial.picture}
-                alt="Testimonee"
-              ></img>
+              <img src={testimonial.picture} alt="Testimonee"></img>
               <div>
                 <p>
                   <b>{testimonial.content}</b> <br />

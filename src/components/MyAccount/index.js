@@ -228,35 +228,54 @@ const EditFormComponent = ({
                   </label>
                 </>
               ) : (
-                <input
-                  type={modelConstraint[`${key}`]}
-                  name={key}
-                  id={key}
-                  key={`input-${selectedItem}-${key}`}
-                  disabled={
-                    key === "id" || key === "createdAt" || key === "updatedAt"
-                      ? true
-                      : false
-                  }
-                  step={key === "price" ? ".01" : ""}
-                  pattern={
-                    key === "password"
-                      ? `^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[A-Za-z0123456789/?!;'":,.<>][}{!@#$%^&*()-=_+\`~\\]{8,}$`
-                      : null
-                  }
-                  placeholder={
-                    key === "password"
-                      ? "must contain an upper and lower case letter and a number and a symbol"
-                      : null
-                  }
-                  onChange={(event) => {
-                    setEditForm({
-                      ...editForm,
-                      [event.target.name]: event.target.value,
-                    });
-                  }}
-                  value={editForm[`${key}`]}
-                ></input>
+                <>
+                  <input
+                    type={modelConstraint[`${key}`]}
+                    name={key}
+                    id={key}
+                    key={`input-${selectedItem}-${key}`}
+                    disabled={
+                      key === "id" || key === "createdAt" || key === "updatedAt"
+                        ? true
+                        : false
+                    }
+                    step={key === "price" ? ".01" : ""}
+                    pattern={
+                      key === "password"
+                        ? `^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[A-Za-z0123456789/?!;'":,.<>][}{!@#$%^&*()-=_+\`~\\]{8,}$`
+                        : null
+                    }
+                    placeholder={
+                      key === "password"
+                        ? "must contain an upper and lower case letter and a number and a symbol"
+                        : null
+                    }
+                    accept={key === "picture" ? ".png,.jpg" : null}
+                    onChange={async (event) => {
+                      // if we have a picture, we must convert it to base64 first
+                      if (event.target.name === "picture") {
+                        var result = await convertImageToBase64(
+                          event.target.files[0]
+                        );
+                        setEditForm({
+                          ...editForm,
+                          [event.target.name]: result,
+                        });
+                      } else {
+                        setEditForm({
+                          ...editForm,
+                          [event.target.name]: event.target.value,
+                        });
+                      }
+                    }}
+                    value={key !== "picture" ? editForm[`${key}`] : ""}
+                  ></input>
+                  {key === "picture" ? (
+                    <img alt="not selected yet" src={editForm[`${key}`]}></img>
+                  ) : (
+                    <br />
+                  )}
+                </>
               )}
             </>
           ))

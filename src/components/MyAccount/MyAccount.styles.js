@@ -92,7 +92,7 @@ export const Form = styled.form`
   img {
     height: 4rem;
     width: 4rem;
-    display: inline-block;
+    display: inline;
     transition: all 500ms linear;
     :hover {
       height: 10rem;
