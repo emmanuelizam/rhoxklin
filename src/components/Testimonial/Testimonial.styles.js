@@ -85,8 +85,8 @@ export const Testimony = styled.div`
   }
 
   img {
-    width: 30%;
-    height: auto;
+    width: 15rem;
+    height: 15rem;
   }
 `;
 export const LeftArrow = styled.a`
