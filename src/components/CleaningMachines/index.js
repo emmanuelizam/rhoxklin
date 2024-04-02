@@ -11,10 +11,12 @@ import {
   Price,
 } from "./CleaningMachines.styles";
 import { Context } from "../../context";
+import Loader from "../Loader";
 
 const CleaningMachines = () => {
   const [cleaningMachines, setCleaningMachines] = useState([]);
   const [state, setstate, localCart, setLocalCart] = useContext(Context);
+  const [loading, setLoading] = useState(true);
 
   const addToCart = async (machine_id) => {
     const cart = localCart; // create a copy of the local cart and modify that copy
@@ -97,6 +99,7 @@ const CleaningMachines = () => {
 
   useEffect(() => {
     const getCleaningMachines = async () => {
+      setLoading(true);
       try {
         const resp = await API.fetchCleaningMachines();
         if (resp.ok) {
@@ -104,6 +107,7 @@ const CleaningMachines = () => {
             .json()
             .then((value) => {
               setCleaningMachines(value);
+              setLoading(false);
             })
             .catch((error) => {
               console.log(error);
@@ -121,7 +125,7 @@ const CleaningMachines = () => {
         <h2>CLEANING MACHINES</h2>
       </Title>
       <Content>
-        {cleaningMachines.length > 0 ? (
+        {!loading ? (
           cleaningMachines.map((machine) => (
             <Item key={machine.id}>
               <Details>
@@ -151,7 +155,7 @@ const CleaningMachines = () => {
             </Item>
           ))
         ) : (
-          <h1>Loading...</h1>
+          <Loader></Loader>
         )}
       </Content>
       <ContactUsButton href="./contactus">
