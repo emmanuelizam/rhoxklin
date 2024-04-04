@@ -48,7 +48,7 @@ const CleaningServices = ({ setDisplay, setMessageTitle }) => {
           </NameStyle1>
         </Service>
       </Content>
-      <ContactUsButton href="/rhoxklin/contactus">
+      <ContactUsButton href="/contactus">
         <h2>CONTACT US</h2>
       </ContactUsButton>
     </Wrapper>

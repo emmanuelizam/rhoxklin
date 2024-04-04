@@ -38,19 +38,19 @@ const Header = () => {
         <LogoImg src={logo} alt="Logo"></LogoImg>
         <Bar></Bar>
         <NavigationContent>
-          <Home href="/rhoxklin/">
+          <Home href="/">
             <h3>Home</h3>
           </Home>
-          <Services href="/rhoxklin/#services">
+          <Services href="/#services">
             <h3>Services</h3>
           </Services>
-          <ContactUsHeader href="/rhoxklin/contactus">
+          <ContactUsHeader href="/contactus">
             <h3>Contact Us</h3>
           </ContactUsHeader>
-          <SignIn href="/rhoxklin/login">
+          <SignIn href="/login">
             <h3>Log In</h3>
           </SignIn>
-          <Cart cart={cart} href="/rhoxklin/cart">
+          <Cart cart={cart} href="/cart">
             <img src={cart} alt="cart"></img>
             <span>{localCartLength}</span>
           </Cart>

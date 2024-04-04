@@ -28,7 +28,7 @@ const Login = () => {
         sessionStorage.setItem("token", data.token);
         sessionStorage.setItem("id", data.user.id);
         setstate(data);
-        navigate("/rhoxklin/myaccount");
+        navigate("/myaccount");
       } else {
         return <h1>Something went wrong</h1>;
       }
@@ -80,14 +80,14 @@ const Login = () => {
             onChange={handleChange}
             value={loginDetails.password}
           ></input>
-          <a href="/rhoxklin/contactus" id="forgotPassword">
+          <a href="/contactus" id="forgotPassword">
             forgot password?
           </a>
           <br />
           <br />
 
           <input type="submit" name="login" id="login" value="Login"></input>
-          <a href="/rhoxklin/contactus">"Don't have an account?"</a>
+          <a href="/contactus">"Don't have an account?"</a>
         </form>
       </Content>
       <ContactUsButton href="./contactus">

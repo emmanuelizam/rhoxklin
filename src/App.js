@@ -19,43 +19,31 @@ function App() {
     <UserProvider>
       <Router>
         <Routes>
-          <Route path="/rhoxklin/" element={<HomePage></HomePage>} />
-          <Route
-            path="/rhoxklin/laundry"
-            element={<LaundryPage></LaundryPage>}
-          />
-          <Route
-            path="/rhoxklin/cleaning"
-            element={<CleaningPage></CleaningPage>}
-          />
+          <Route path="/" element={<HomePage></HomePage>} />
+          <Route path="/laundry" element={<LaundryPage></LaundryPage>} />
+          <Route path="/cleaning" element={<CleaningPage></CleaningPage>} />
 
           <Route
-            path="/rhoxklin/cleaningproductscategories"
+            path="/cleaningproductscategories"
             element={
               <CleaningProductsCategoriesPage></CleaningProductsCategoriesPage>
             }
           />
           <Route
-            path="/rhoxklin/cleaningmachines"
+            path="/cleaningmachines"
             element={<CleaningMachinesPage></CleaningMachinesPage>}
           />
-          <Route path="/rhoxklin/artworks" element={<h1>Coming Soon!</h1>} />
+          <Route path="/artworks" element={<h1>Coming Soon!</h1>} />
+          <Route path="/pickupanddelivery" element={<h1>Coming Soon!</h1>} />
+          <Route path="/cart" element={<CartPage></CartPage>} />
+          <Route path="/login" element={<LoginPage></LoginPage>} />
           <Route
-            path="/rhoxklin/pickupanddelivery"
-            element={<h1>Coming Soon!</h1>}
-          />
-          <Route path="/rhoxklin/cart" element={<CartPage></CartPage>} />
-          <Route path="/rhoxklin/login" element={<LoginPage></LoginPage>} />
-          <Route
-            path="/rhoxklin/createaccount"
+            path="/createaccount"
             element={<CreateAccountPage></CreateAccountPage>}
           />
+          <Route path="/myaccount" element={<MyAccountPage></MyAccountPage>} />
           <Route
-            path="/rhoxklin/myaccount"
-            element={<MyAccountPage></MyAccountPage>}
-          />
-          <Route
-            path="/rhoxklin/contactus"
+            path="/contactus"
             element={<ContactUsPage></ContactUsPage>}
           ></Route>
         </Routes>

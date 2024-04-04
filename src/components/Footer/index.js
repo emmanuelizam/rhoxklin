@@ -31,24 +31,22 @@ const Footer = () => {
         <ServicesContacts>
           <Services>
             <h2>
-              <a href="/rhoxklin/laundry">Laundry</a>
+              <a href="/laundry">Laundry</a>
             </h2>
             <h2>
-              <a href="/rhoxklin/cleaning">Cleaning</a>
+              <a href="/cleaning">Cleaning</a>
             </h2>
             <h2>
-              <a href="/rhoxklin/cleaningproductscategories">
-                Cleaning Products
-              </a>
+              <a href="/cleaningproductscategories">Cleaning Products</a>
             </h2>
             <h2>
-              <a href="/rhoxklin/artworks">Art Works</a>
+              <a href="/artworks">Art Works</a>
             </h2>
             <h2>
-              <a href="/rhoxklin/pickupanddelivery">Pick-up and delivery</a>
+              <a href="/pickupanddelivery">Pick-up and delivery</a>
             </h2>
             <h2>
-              <a href="/rhoxklin/contactus">Contact Us</a>
+              <a href="/contactus">Contact Us</a>
             </h2>
           </Services>
           <Bar />
@@ -78,7 +76,7 @@ const Footer = () => {
               <img src={Twitter} alt="Twitter" />
             </a>
             <a
-              href="https://www.instagram.com/rhoxklin/"
+              href="https://www.instagram.com/rhoxklin"
               title="Instagram"
               target="_blank"
               rel="noreferrer"

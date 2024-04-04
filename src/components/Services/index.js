@@ -22,7 +22,7 @@ const Services = () => {
       </Title>
       <Content>
         <Laundry>
-          <a href="/rhoxklin/laundry">
+          <a href="/laundry">
             <img src={laundry} alt="laundry"></img>
             <div>
               <h3>Laundry</h3>
@@ -31,7 +31,7 @@ const Services = () => {
         </Laundry>
 
         <Cleaning>
-          <a href="/rhoxklin/cleaning">
+          <a href="/cleaning">
             <div>
               <h3>Cleaning</h3>
             </div>
@@ -39,7 +39,7 @@ const Services = () => {
           </a>
         </Cleaning>
         <CleaningProducts>
-          <a href="/rhoxklin/cleaningproductscategories">
+          <a href="/cleaningproductscategories">
             <img src={cleaningProducts} alt="cleaning products"></img>
             <div>
               <h3>Cleaning Products</h3>
@@ -47,7 +47,7 @@ const Services = () => {
           </a>
         </CleaningProducts>
         <ArtWorks>
-          <a href="/rhoxklin/artworks">
+          <a href="/artworks">
             <div>
               <h3>Art Works</h3>
             </div>
@@ -55,7 +55,7 @@ const Services = () => {
           </a>
         </ArtWorks>
         <PickUpAndDelivery>
-          <a href="/rhoxklin/pickupanddelivery">
+          <a href="/pickupanddelivery">
             <img src={laundry} alt="pick up and delivery"></img>
             <div>
               <h3>Pick-Up and Delivery</h3>
@@ -63,7 +63,7 @@ const Services = () => {
           </a>
         </PickUpAndDelivery>
       </Content>
-      <ContactUsButton href="/rhoxklin/contactus">
+      <ContactUsButton href="/contactus">
         <h2>Contact Us Now</h2>
       </ContactUsButton>
     </Wrapper>

@@ -497,10 +497,10 @@ const MyAccount = () => {
               );
             }
           } else {
-            navigate("/rhoxklin/login");
+            navigate("/login");
           }
         } else {
-          navigate("/rhoxklin/login");
+          navigate("/login");
         }
       } catch (error) {
         setError(error);
