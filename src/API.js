@@ -1,7 +1,8 @@
 import Utils from "./Utils";
-
+//const base = "https://api.rhoxklin.com";
+const base = "http://127.0.0.1:5000";
 const authenticate = (credentials) => {
-  return fetch("http://localhost:5000/protected-api/login", {
+  return fetch(`${base}/protected-api/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials),
@@ -9,55 +10,52 @@ const authenticate = (credentials) => {
 };
 
 const fetchCurrentUserDetails = (user) => {
-  return fetch(`http://localhost:5000/protected-api/staff/${user.id}`, {
+  return fetch(`${base}/protected-api/staff/${user.id}`, {
     method: "GET",
     headers: { Authorization: `Bearer ${user.token}` },
   });
 };
 
 const fetchMessages = (token, query) => {
-  return fetch(
-    `http://localhost:5000/protected-api/staffcustomermessage?name=${query}`,
-    {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+  return fetch(`${base}/protected-api/staffcustomermessage?name=${query}`, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  });
 };
 
 const fetchCustomers = (token, query) => {
-  return fetch(`http://localhost:5000/protected-api/customer?name=${query}`, {
+  return fetch(`${base}/protected-api/customer?name=${query}`, {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 
 const fetchStaffs = (token, query) => {
-  return fetch(`http://localhost:5000/protected-api/staff?name=${query}`, {
+  return fetch(`${base}/protected-api/staff?name=${query}`, {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 
 const fetchStaff = (token, id) => {
-  return fetch(`http://localhost:5000/protected-api/staff/${id}`, {
+  return fetch(`${base}/protected-api/staff/${id}`, {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 
 const fetchProducts = (query) => {
-  return fetch(`http://localhost:5000/api/product?name=${query}`, {
+  return fetch(`${base}/api/product?name=${query}`, {
     method: "GET",
   });
 };
 const fetchCartItems = () => {
-  return fetch(`http://localhost:5000/api/cartItem`, {
+  return fetch(`${base}/api/cartItem`, {
     method: "GET",
   });
 };
 const fetchTestimonials = (query) => {
-  return fetch(`http://localhost:5000/api/testimonial?name=${query}`, {
+  return fetch(`${base}/api/testimonial?name=${query}`, {
     method: "GET",
   });
 };
@@ -67,7 +65,7 @@ const addCleaningMachineToCart = (id) => {
   item.ProductId = id;
   item.dateAdded = Utils.getDateTime();
   item.quantity = 1;
-  return fetch("http://localhost:5000/api/cartItem", {
+  return fetch(`${base}/api/cartItem`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(item),
@@ -75,7 +73,7 @@ const addCleaningMachineToCart = (id) => {
 };
 
 const postMessage = (message) => {
-  return fetch("http://localhost:5000/api/staffcustomermessage", {
+  return fetch(`${base}/api/staffcustomermessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(message),
@@ -83,7 +81,7 @@ const postMessage = (message) => {
 };
 
 const postStaff = (token, staff) => {
-  return fetch("http://localhost:5000/protected-api/staff", {
+  return fetch(`${base}/protected-api/staff`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -94,7 +92,7 @@ const postStaff = (token, staff) => {
 };
 
 const postCustomer = (token, customer) => {
-  return fetch("http://localhost:5000/protected-api/customer", {
+  return fetch(`${base}/protected-api/customer`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -105,7 +103,7 @@ const postCustomer = (token, customer) => {
 };
 
 const postProduct = (token, product) => {
-  return fetch("http://localhost:5000/protected-api/product", {
+  return fetch(`${base}/protected-api/product`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -116,7 +114,7 @@ const postProduct = (token, product) => {
 };
 
 const postService = (token, service) => {
-  return fetch("http://localhost:5000/protected-api/service", {
+  return fetch(`${base}/protected-api/service`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -127,7 +125,7 @@ const postService = (token, service) => {
 };
 
 const postTestimonial = (token, testimonial) => {
-  return fetch("http://localhost:5000/protected-api/testimonial", {
+  return fetch(`${base}/protected-api/testimonial`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -138,7 +136,7 @@ const postTestimonial = (token, testimonial) => {
 };
 
 const putMessage = (token, message) => {
-  return fetch("http://localhost:5000/api/staffcustomermessage", {
+  return fetch(`${base}/api/staffcustomermessage`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -149,7 +147,7 @@ const putMessage = (token, message) => {
 };
 
 const putStaff = (token, staff) => {
-  return fetch("http://localhost:5000/protected-api/staff", {
+  return fetch(`${base}/protected-api/staff`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -160,7 +158,7 @@ const putStaff = (token, staff) => {
 };
 
 const putCustomer = (token, customer) => {
-  return fetch("http://localhost:5000/protected-api/customer", {
+  return fetch(`${base}/protected-api/customer`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -171,7 +169,7 @@ const putCustomer = (token, customer) => {
 };
 
 const putProduct = (token, product) => {
-  return fetch("http://localhost:5000/protected-api/product", {
+  return fetch(`${base}/protected-api/product`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -182,7 +180,7 @@ const putProduct = (token, product) => {
 };
 
 const putService = (token, service) => {
-  return fetch("http://localhost:5000/protected-api/service", {
+  return fetch(`${base}/protected-api/service`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -193,7 +191,7 @@ const putService = (token, service) => {
 };
 
 const putTestimonial = (token, testimonial) => {
-  return fetch("http://localhost:5000/protected-api/testimonial", {
+  return fetch(`${base}/protected-api/testimonial`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -204,58 +202,55 @@ const putTestimonial = (token, testimonial) => {
 };
 
 const removeCleaningMachineFromCart = (token, id) => {
-  return fetch(`http://localhost:5000/api/cartItem/${id}`, {
+  return fetch(`${base}/api/cartItem/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 
 const deleteCurrentUserDetails = (token, id) => {
-  return fetch(`http://localhost:5000/protected-api/staff/${id}`, {
+  return fetch(`${base}/protected-api/staff/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 const deleteStaffs = (token, id) => {
-  return fetch(`http://localhost:5000/protected-api/staff/${id}`, {
+  return fetch(`${base}/protected-api/staff/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 
 const deleteCustomers = (token, id) => {
-  return fetch(`http://localhost:5000/protected-api/customer/${id}`, {
+  return fetch(`${base}/protected-api/customer/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 
 const deleteCleaningProducts = (token, id) => {
-  return fetch(`http://localhost:5000/protected-api/product/${id}`, {
+  return fetch(`${base}/protected-api/product/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 
 const deleteMessages = async (token, id) => {
-  return fetch(
-    `http://localhost:5000/protected-api/staffcustomermessage/${id}`,
-    {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+  return fetch(`${base}/protected-api/staffcustomermessage/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
 };
 
 const deleteServices = async (token, id) => {
-  return fetch(`http://localhost:5000/protected-api/service/${id}`, {
+  return fetch(`${base}/protected-api/service/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 
 const deleteTestimonials = async (token, id) => {
-  return fetch(`http://localhost:5000/protected-api/testimonial/${id}`, {
+  return fetch(`${base}/protected-api/testimonial/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });

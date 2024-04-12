@@ -55,7 +55,9 @@ export const Content = styled.div`
 
 export const Testimony = styled.div`
   display: ${({ display }) => display};
+  overflow: hidden;
   width: 80%;
+  height: 180px;
   animation: change 1s linear;
 
   @keyframes change {
@@ -68,25 +70,30 @@ export const Testimony = styled.div`
   }
 
   div {
-    width: 100%;
+    display: block;
+    height: 100%;
     background-color: var(--white);
-    text-overflow: ellipsis;
+    padding: 1rem;
 
     p {
-      font-size: var(--font_very_small);
+      font-size: 0.75rem;
       i {
-        font-size: xx-small;
+        font-size: 0.4rem;
       }
       color: var(--blue_dark);
-      @media screen and (max-width: 500px) {
+      @media screen and (max-width: 720px) {
         font-size: 0.5rem;
       }
     }
   }
-
-  img {
-    width: 15rem;
-    height: 15rem;
+  .image_container {
+    height: 100%;
+    width: 120px;
+    float: left;
+    img {
+      height: 100%;
+      width: 100%;
+    }
   }
 `;
 export const LeftArrow = styled.a`

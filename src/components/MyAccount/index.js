@@ -61,6 +61,7 @@ const displayModels = {
   Products: {
     id: null,
     name: null,
+    picture: null,
     description: null,
     price: null,
     createdAt: null,
@@ -76,9 +77,9 @@ const displayModels = {
   },
   Messages: {
     id: null,
-    content: null,
     StaffId: null,
     CustomerId: null,
+    content: null,
     senderIsCustomer: null,
     dateSend: null,
     createdAt: null,
@@ -157,7 +158,11 @@ const EditFormComponent = ({
         // note: use spread to ensure that a new object is created
         // otherwise return the item
         setTableData(
-          tableData.map((item) => (item.id === data.id ? { ...data } : item))
+          tableData.map((item) =>
+            item.id === data.id // get the item that was just edited
+              ? { ...displayModels[`${selectedItem}`], ...data } // display it's model and edit the entries with data
+              : item
+          )
         );
         setRecordAdded(true);
       }
@@ -484,7 +489,12 @@ const MyAccount = () => {
             // otherwise if there is nothing in data, return a displayModel
             if (selectedItem !== "Account Details") {
               setTableData(
-                data.length > 0 ? data : [displayModels[`${selectedItem}`]]
+                data.length > 0
+                  ? data.map(
+                      (item) =>
+                        [{ ...displayModels[`${selectedItem}`], ...item }][0]
+                    )
+                  : [displayModels[`${selectedItem}`]]
               );
             } else {
               // otherwise check there are keys in data

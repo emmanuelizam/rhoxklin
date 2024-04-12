@@ -64,26 +64,38 @@ export const Item = styled.div`
   padding: 1rem;
 `;
 
+export const Photo = styled.div`
+  height: 150px;
+  width: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 export const Details = styled.div`
   background-color: var(--blue_light);
   padding: 1rem;
+  margin-top: 2px;
   width: 100%;
-  height: 100%;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 5%;
 
   p {
     text-overflow: ellipsis;
+    text-align: center;
     overflow-x: hidden;
     white-space: normal;
     color: var(--white);
+    margin: 0;
   }
 `;
 
 export const Price = styled.p`
+  text-align: left;
   font-size: 1rem;
   font-weight: 600;
-  margin-top: 8px;
+  margin-top: 2px;
   color: black;
 `;
 

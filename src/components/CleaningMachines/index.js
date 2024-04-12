@@ -9,6 +9,7 @@ import {
   Title,
   Wrapper,
   Price,
+  Photo,
 } from "./CleaningMachines.styles";
 import { Context } from "../../context";
 import Loader from "../Loader";
@@ -101,7 +102,7 @@ const CleaningMachines = () => {
     const getCleaningMachines = async () => {
       setLoading(true);
       try {
-        const resp = await API.fetchCleaningMachines();
+        const resp = await API.fetchProducts("");
         if (resp.ok) {
           resp
             .json()
@@ -128,6 +129,9 @@ const CleaningMachines = () => {
         {!loading ? (
           cleaningMachines.map((machine) => (
             <Item key={machine.id}>
+              <Photo>
+                <img src={machine.picture} alt={machine.name}></img>
+              </Photo>
               <Details>
                 <p>{machine.name}</p>
               </Details>

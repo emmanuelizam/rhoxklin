@@ -2,7 +2,7 @@
   "name": "rhoxklin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://emmanuelizam.github.io/rhoxklin",
+  "homepage": "https://rhoxklin.com",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -20,6 +20,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
+    "prebuild": "set GENERATE_SOURCEMAP=true",     
     "build": "react-scripts build && cp build/index.html build/404.html",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

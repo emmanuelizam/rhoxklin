@@ -30,13 +30,13 @@ const CleaningProductsCategories = ({ setDisplay, setMessageTitle }) => {
       </Title>
       <Content>
         <Service>
-          <NameStyle1 className="cleaning_product" onClick={myfunction}>
+          <NameStyle1 className="cleaning_product" href="./cleaningmachines">
             <h1>Basic Cleaning Products</h1>
           </NameStyle1>
-          <NameStyle2 className="cleaning_product" onClick={myfunction}>
+          <NameStyle2 className="cleaning_product" href="./cleaningmachines">
             <h1>Cleaning Chemicals </h1>
           </NameStyle2>
-          <NameStyle1 className="cleaning_product" onClick={myfunction}>
+          <NameStyle1 className="cleaning_product" href="./cleaningmachines">
             <h1>Essential Cleaning Tools</h1>
           </NameStyle1>
           <NameStyle2 className="cleaning_product" href="./cleaningmachines">

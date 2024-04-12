@@ -14,7 +14,7 @@ const ContactUs = () => {
     }-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}.${d.getMilliseconds()}`;
   };
 
-  function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const message = {
@@ -25,19 +25,20 @@ const ContactUs = () => {
       dateSend: getDateTime(),
     };
 
-    fetch("http://localhost:5000/api/staffcustomermessage", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(message),
-    })
-      .then((response) => response.json())
-      .then((data) =>
-        data.message === "success"
-          ? setMessageSendSuccessfully(true)
-          : setMessageSendSuccessfully(false)
-      )
-      .catch((error) => console.log(error));
-  }
+    setMessageSendSuccessfully(false);
+
+    const response = await fetch(
+      "http://localhost:5000/api/staffcustomermessage",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(message),
+      }
+    );
+    if (response.ok) {
+      setMessageSendSuccessfully(true);
+    }
+  };
 
   function handleChange(event) {
     setCustomerMessage({

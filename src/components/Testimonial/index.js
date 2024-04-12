@@ -55,11 +55,12 @@ export const Testimonial = () => {
     getTestimonials();
   }, []);
 
+  // changes testimonials from left to right
   function updateIndex() {
     if (testimonials.length !== 0) {
       setTestimonials((prev) => {
         const update = [...prev];
-        update[index].display = "flex";
+        update[index].display = "block";
         return update;
       });
       setPrevIndex(index);
@@ -82,12 +83,13 @@ export const Testimonial = () => {
     updateIndex();
   }, 5000);
 
+  // changes testimonials from right to left
   function changeTestimonial(dir) {
     if (dir === "left") {
       if (testimonials) {
         setTestimonials((prev) => {
           const update = [...prev];
-          update[prevIndex].display = "flex";
+          update[prevIndex].display = "block";
           return update;
         });
         setIndex(prevIndex);
@@ -129,7 +131,10 @@ export const Testimonial = () => {
               display={testimonial.display}
               id={testimonial.id}
             >
-              <img src={testimonial.picture} alt="Testimonee"></img>
+              <div className="image_container">
+                <img src={testimonial.picture} alt={testimonial.name}></img>
+              </div>
+
               <div>
                 <p>
                   <b>{testimonial.content}</b> <br />
